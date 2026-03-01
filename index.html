@@ -539,15 +539,14 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 
 /* ── FAB ──────────────────────────────────────────────────── */
 .fab {
-  display: none; position: fixed; bottom: calc(20px + env(safe-area-inset-bottom));
-  right: 20px; width: 52px; height: 52px; background: var(--blue); border-radius: 50%;
-  box-shadow: var(--shadow-lg); border: none; color: #fff; font-size: 24px;
+  display: none; position: fixed; bottom: calc(24px + env(safe-area-inset-bottom));
+  right: 20px; width: 56px; height: 56px; background: var(--blue); border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(37,99,235,.45); border: none; color: #fff; font-size: 28px;
   cursor: pointer; z-index: 150; align-items: center; justify-content: center;
-  transition: transform .15s;
+  transition: transform .15s, box-shadow .15s; line-height: 1;
 }
-.fab:hover { transform: scale(1.05); }
-.fab:active { transform: scale(.97); }
-.fab.hidden { display: none !important; }
+.fab:hover { transform: scale(1.07); box-shadow: 0 6px 20px rgba(37,99,235,.55); }
+.fab:active { transform: scale(.95); }
 
 /* ── SIDEBAR OVERLAY (mobile) ─────────────────────────────── */
 .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 90; }
@@ -768,10 +767,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .sidebar.collapsed { transform: translateX(-110%); }
   .sidebar-overlay.open { display: block; }
 
-  /* FAB – jen v app, ne na auth */
-  #auth-screen ~ .fab,
-  #auth-screen:not([style*="none"]) + * .fab { display: none !important; }
-  .fab { display: flex; }
+  /* FAB – zobrazit jen v appce (JS volá fabShow po přihlášení) */
+  .fab { display: none; }
 
   .btn-new { display: none; }
   .desktop-only { display: none !important; }
@@ -780,6 +777,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .topbar { gap: 8px; padding: 0 12px; height: 54px; }
   .sidebar-toggle-btn { width: 32px; height: 32px; flex-shrink: 0; }
   .breadcrumb { font-size: 14px; line-height: 1; }
+  /* Synchronizovat – skrýt na mobilu (je pull-to-refresh + 30s autointerval) */
+  .sync-btn { display: none !important; }
   /* Hledat – skrýt na mobilu */
   .search-wrap { display: none !important; }
   /* Sort – menší text */
@@ -844,8 +843,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .ptr-spinner.spin { animation: ptr-spin .6s linear infinite; }
   @keyframes ptr-spin { to { transform: rotate(360deg); } }}
 
-/* FAB skrýt pokud je auth-screen viditelný (JS řeší display) */
-#app[style*="none"] ~ .fab { display: none !important; }
+/* FAB – JS řídí viditelnost přes style.display (fabShow/fabHide) */
 </style>
 </head>
 <body>
@@ -1552,7 +1550,7 @@ function doLogout() {
   if (syncIntervalId) { clearInterval(syncIntervalId); syncIntervalId = null; }
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
-  document.querySelector('.fab').classList.add('hidden');
+  fabHide();
 }
 
 // ============================================================
@@ -1569,8 +1567,7 @@ async function startApp(user) {
 
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  // FAB jen na mobilu
-  if (window.innerWidth <= 720) document.querySelector('.fab').classList.remove('hidden');
+  fabShow(); // zobrazí jen na mobilu (innerWidth <= 720)
 
   const savedTheme = localStorage.getItem('zl_theme');
   if (savedTheme === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-toggle').classList.add('on'); }
