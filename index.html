@@ -50,72 +50,72 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 /* ── AUTH ─────────────────────────────────────────────────── */
 #auth-screen {
   min-height: 100dvh; display: flex; align-items: center; justify-content: center;
-  background: #f0f2f5; font-family: 'Geist', sans-serif; color: #1a1d23;
+  background: var(--bg2); font-family: 'Geist', sans-serif;
 }
 .auth-box {
-  background: #fff; border: 1px solid #e4e7ed; border-radius: 14px;
-  padding: 36px; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.09);
+  background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+  padding: 36px; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.12);
 }
 .auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
 .auth-logo-icon {
-  width: 38px; height: 38px; background: #2563eb; border-radius: 9px;
+  width: 38px; height: 38px; background: var(--blue); border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
   color: #fff; font-weight: 700; font-size: 20px; flex-shrink: 0;
 }
-.auth-logo span { font-size: 22px; font-weight: 700; color: #1a1d23; }
+.auth-logo span { font-size: 22px; font-weight: 700; color: var(--text); }
 
 /* Supabase config */
 .sb-config-box {
-  background: #f7f8fa; border: 1px solid #e4e7ed; border-radius: 10px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
   padding: 16px; margin-bottom: 20px;
 }
 .sb-config-title {
-  font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase;
+  font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase;
   letter-spacing: .05em; margin-bottom: 12px;
 }
 .sb-status-row {
   display: flex; align-items: center; gap: 8px; margin-top: 12px;
   font-size: 13px; font-weight: 500;
 }
-.sb-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; transition: background .3s; }
+.sb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border2); flex-shrink: 0; transition: background .3s; }
 .sb-dot.ok { background: #16a34a; }
 .sb-dot.err { background: #dc2626; }
-.sb-status-text { color: #6b7280; }
+.sb-status-text { color: var(--text2); }
 .sb-status-text.ok { color: #16a34a; }
 .sb-status-text.err { color: #dc2626; }
 .sb-test-btn {
-  margin-left: auto; padding: 4px 10px; border: 1px solid #e4e7ed; border-radius: 6px;
-  font-size: 12px; font-family: 'Geist', sans-serif; background: #fff;
-  color: #6b7280; cursor: pointer; transition: all .12s;
+  margin-left: auto; padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text2); cursor: pointer; transition: all .12s;
 }
-.sb-test-btn:hover { border-color: #2563eb; color: #2563eb; }
+.sb-test-btn:hover { border-color: var(--blue); color: var(--blue); }
 
 .auth-tabs {
-  display: flex; margin-bottom: 22px; border: 1px solid #e4e7ed;
+  display: flex; margin-bottom: 22px; border: 1px solid var(--border);
   border-radius: 9px; overflow: hidden;
 }
 .auth-tab {
   flex: 1; padding: 9px; text-align: center; cursor: pointer;
-  font-size: 14px; font-weight: 500; color: #6b7280; background: #f7f8fa; transition: all .15s;
+  font-size: 14px; font-weight: 500; color: var(--text2); background: var(--bg2); transition: all .15s;
 }
-.auth-tab:hover { background: #eff6ff; color: #2563eb; }
-.auth-tab.active { background: #eff6ff; color: #2563eb; font-weight: 600; }
+.auth-tab:hover { background: var(--blue-bg); color: var(--blue); }
+.auth-tab.active { background: var(--blue-bg); color: var(--blue); font-weight: 600; }
 .auth-field { margin-bottom: 14px; }
-.auth-field label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 5px; }
+.auth-field label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 5px; }
 .auth-field input {
-  width: 100%; padding: 9px 12px; border: 1px solid #e4e7ed; border-radius: 8px;
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
   font-size: 14px; font-family: 'Geist', sans-serif; outline: none; transition: border .15s;
-  color: #1a1d23; background: #fff;
+  color: var(--text); background: var(--bg);
 }
-.auth-field input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+.auth-field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
 .auth-btn {
-  width: 100%; padding: 10px; background: #2563eb; color: #fff; border: none;
+  width: 100%; padding: 10px; background: var(--blue); color: #fff; border: none;
   border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Geist', sans-serif;
   cursor: pointer; margin-top: 6px; transition: background .15s;
 }
 .auth-btn:hover { background: #1d4ed8; }
-.auth-error { font-size: 13px; color: #dc2626; margin-top: 10px; text-align: center; min-height: 18px; }
-.auth-remember { display: flex; align-items: center; gap: 8px; margin: 10px 0; font-size: 13px; color: #6b7280; cursor: pointer; }
+.auth-error { font-size: 13px; color: var(--red); margin-top: 10px; text-align: center; min-height: 18px; }
+.auth-remember { display: flex; align-items: center; gap: 8px; margin: 10px 0; font-size: 13px; color: var(--text2); cursor: pointer; }
 .auth-remember input { width: 14px; height: 14px; cursor: pointer; }
 
 /* ── APP LAYOUT ───────────────────────────────────────────── */
@@ -675,21 +675,17 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .btn-new { display: none; }
   .desktop-only { display: none !important; }
 
-  /* Topbar – kompaktnější na mobilu, vše vystředěné */
+  /* Topbar – kompaktnější, vše vystředěné */
   .topbar { gap: 8px; padding: 0 12px; height: 54px; }
   .sidebar-toggle-btn { width: 32px; height: 32px; flex-shrink: 0; }
   .breadcrumb { font-size: 14px; line-height: 1; }
-  .search-wrap { height: 32px; }
-  .search-wrap input { width: 100px; height: 32px; font-size: 13px; padding: 0 10px 0 28px; }
-  .search-wrap input:focus { width: 130px; }
-  .sort-select { height: 32px; font-size: 13px; padding: 0 6px; }
+  /* Hledat – skrýt na mobilu */
+  .search-wrap { display: none !important; }
+  /* Sort – menší text */
+  .sort-select { height: 32px; font-size: 12px !important; padding: 0 6px; max-width: 110px; }
 
   /* iOS: font-size >= 16px zabrání autozoomu při focusu */
-  input, textarea, select {
-    font-size: 16px !important;
-  }
-  .search-wrap input { font-size: 16px !important; }
-  .sort-select { font-size: 16px !important; }
+  input, textarea, select { font-size: 16px !important; }
 
   /* Výpis záložek – skrýt poznámku, copy btn a task badge */
   .bm-note-preview { display: none !important; }
@@ -698,7 +694,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   /* Mobilní doména – zobrazit pod názvem */
   .mobile-only { display: block !important; }
   .bm-domain-mobile { display: block; }
-  /* Záložka row – kompaktnější, dvouřádkový layout */
+  /* Záložka row – kompaktnější */
   .bookmark-row { padding: 10px 12px; align-items: center; }
   .bm-title { font-size: 13px; }
   .bm-domain { pointer-events: none; color: var(--text3) !important; text-decoration: none !important; font-size: 11px; }
@@ -717,9 +713,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .modal-body { padding: 14px 16px; }
   .modal-header { padding: 0 16px; height: auto; min-height: 54px; padding-top: 10px; padding-bottom: 10px; }
   .modal-footer { padding: 10px 16px; }
-  /* Název záložky – zalamovat */
   .modal-title-input { white-space: normal; word-break: break-word; font-size: 16px; }
-  /* URL pole – větší na mobilu */
   .url-textarea { min-height: 80px; font-size: 16px; }
   .modal-url-copy-btn { height: 80px; }
 
@@ -729,13 +723,25 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .help-toolbar { padding: 7px 16px; }
   .help-footer { padding: 12px 16px; }
 
-  /* Auth box – plná šířka bez zaoblení */
-  #auth-screen { align-items: flex-start; padding: 0; background: #fff; }
+  /* Auth box – plná šířka bez zaoblení, respektuje dark mode */
+  #auth-screen { align-items: flex-start; padding: 0; }
   .auth-box {
     border-radius: 0; border: none; box-shadow: none;
     max-width: 100vw; width: 100%; padding: 28px 20px;
     min-height: 100dvh; overflow-y: auto;
   }
+
+  /* Pull-to-refresh indikátor – nad list-area */
+  .ptr-indicator {
+    display: flex; align-items: center; justify-content: center;
+    height: 0; overflow: hidden; transition: height .2s ease;
+    color: var(--text3); font-size: 13px; gap: 8px;
+    background: var(--bg); border-bottom: 1px solid transparent;
+  }
+  .ptr-indicator.visible { height: 44px; border-bottom-color: var(--border); }
+  .ptr-spinner { font-size: 18px; display: inline-block; }
+  .ptr-spinner.spin { animation: ptr-spin .6s linear infinite; }
+  @keyframes ptr-spin { to { transform: rotate(360deg); } }
 }
 
 /* FAB skrýt pokud je auth-screen viditelný (JS řeší display) */
@@ -747,7 +753,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 <!-- ═══════════════════════════════════════════════════════════
      AUTH SCREEN
 ═══════════════════════════════════════════════════════════ -->
-<div id="auth-screen">
+<div id="auth-screen" style="display:none">
   <div class="auth-box">
     <div class="auth-logo">
       <div class="auth-logo-icon">Z</div>
@@ -908,6 +914,11 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
       <div class="status-bar">
         <div><span class="status-dot" id="status-dot"></span><span id="status-text">Připojování...</span></div>
         <div class="sync-btn" onclick="sbPull()">↺ Synchronizovat</div>
+      </div>
+
+      <div class="ptr-indicator" id="ptr-indicator">
+        <span class="ptr-spinner" id="ptr-spinner">↺</span>
+        <span id="ptr-text">Táhněte pro obnovení</span>
       </div>
 
       <div class="list-area" id="list-area">
@@ -1072,7 +1083,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 </div>
 
 <div class="toast" id="toast"></div>
-<button class="fab" onclick="openModal()">+</button>
+<button class="fab" id="fab-btn" onclick="openModal()">+</button>
 
 <script>
 // ============================================================
@@ -1265,6 +1276,7 @@ async function tryRestoreSession() {
 
 function doLogout() {
   authToken = null; localStorage.removeItem('zl_session');
+  if (syncIntervalId) { clearInterval(syncIntervalId); syncIntervalId = null; }
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
   document.querySelector('.fab').classList.add('hidden');
@@ -1273,6 +1285,8 @@ function doLogout() {
 // ============================================================
 // START APP
 // ============================================================
+let syncIntervalId = null;
+
 async function startApp(user) {
   currentUser.id = user.id;
   currentUser.email = user.email;
@@ -1294,7 +1308,8 @@ async function startApp(user) {
 
   renderUserPanel();
   await sbPull();
-  setInterval(sbPull, 30000);
+  if (syncIntervalId) clearInterval(syncIntervalId);
+  syncIntervalId = setInterval(sbPull, 30000);
 }
 
 // ============================================================
@@ -1372,6 +1387,16 @@ function fmtDate(ts) {
 
 function getDomain(url) {
   try { return new URL(url).hostname.replace('www.',''); } catch(e) { return url || ''; }
+}
+
+// Bezpečná URL – zamítne javascript: a data: protokoly
+function safeUrl(url) {
+  if (!url) return '';
+  try {
+    const u = new URL(url);
+    if (!['http:', 'https:', 'ftp:'].includes(u.protocol)) return '#';
+    return url;
+  } catch(e) { return '#'; }
 }
 
 function getFaviconUrl(url) {
@@ -1520,10 +1545,10 @@ function renderList() {
       <div class="bm-content">
         <div class="bm-row1">
           ${url
-            ? `<a class="bm-title" href="${esc(url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="${esc(url)}">${esc(b.title || domain || 'Bez názvu')}</a>`
+            ? `<a class="bm-title" href="${esc(safeUrl(url))}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="${esc(url)}">${esc(b.title || domain || 'Bez názvu')}</a>`
             : `<span class="bm-title">${esc(b.title || 'Bez názvu')}</span>`}
           ${domain
-            ? `<a class="bm-domain desktop-only" href="${esc(domainRoot)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(domain)}</a>`
+            ? `<a class="bm-domain desktop-only" href="${esc(safeUrl(domainRoot))}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(domain)}</a>`
             : ''}
         </div>
         ${domain ? `<div class="bm-domain-mobile mobile-only">${esc(domain)}</div>` : ''}
@@ -1535,11 +1560,17 @@ function renderList() {
         ${b.visibility === 'shared' ? '<span class="shared-badge desktop-only">sdílená</span>' : ''}
         <span class="bm-date desktop-only">${fmtDate(b.updated || b.created)}</span>
         <div class="avatar" style="background:${avatarColor}" title="${esc(authorName)}">${esc(initials)}</div>
-        ${url ? `<button class="bm-copy-btn" id="copy-${esc(b.id)}" onclick="event.stopPropagation();copyUrl('${esc(b.id)}','${esc(url)}')" title="Kopírovat URL">⎘</button>` : ''}
+        ${url ? `<button class="bm-copy-btn" id="copy-${esc(b.id)}" onclick="event.stopPropagation();copyUrlById('${esc(b.id)}')" title="Kopírovat URL">⎘</button>` : ''}
         <button class="bm-edit-btn" onclick="event.stopPropagation();openModal('${esc(b.id)}')">Upravit</button>
       </div>
     </div>`;
   }).join('');
+}
+
+function copyUrlById(id) {
+  const b = state.bookmarks.find(x => x.id === id);
+  if (!b || !b.url) return;
+  copyUrl(id, b.url);
 }
 
 function copyUrl(id, url) {
@@ -1608,7 +1639,12 @@ function openModal(id) {
       const notice = document.createElement('div');
       notice.id = 'modal-owner-notice';
       notice.style.cssText = 'font-size:12px;color:var(--text3);background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin-bottom:14px;';
-      notice.innerHTML = `👁 Záložka patří uživateli <b>${authorName}</b>. Zobrazujete jen pro čtení.`;
+      // Bezpečné sestavení DOM bez innerHTML s user-daty (ochrana proti XSS)
+      const icon = document.createTextNode('\U0001f441 Záložka patří uživateli ');
+      const bold = document.createElement('b');
+      bold.textContent = authorName;
+      const suffix = document.createTextNode('. Zobrazujete jen pro čtení.');
+      notice.appendChild(icon); notice.appendChild(bold); notice.appendChild(suffix);
       document.getElementById('modal-body-top').after(notice);
     }
   } else {
@@ -1627,13 +1663,92 @@ function openModal(id) {
   renderTasksList();
   document.getElementById('modal-overlay').classList.add('open');
   setTimeout(() => document.getElementById('modal-title').focus(), 80);
+  fabHide(); // skrýt FAB při otevření modalu
 }
 
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
   ui.editingId = null;
   closeAllDropdowns();
+  fabShow(); // FAB zpět při zavření modalu
 }
+
+// ── FAB VISIBILITY ────────────────────────────────────────────
+function fabShow() {
+  const fab = document.getElementById('fab-btn');
+  if (fab && window.innerWidth <= 720) fab.style.display = 'flex';
+}
+function fabHide() {
+  const fab = document.getElementById('fab-btn');
+  if (fab) fab.style.display = 'none';
+}
+
+// ── PULL-TO-REFRESH ───────────────────────────────────────────
+(function initPullToRefresh() {
+  if (window.innerWidth > 720) return; // jen mobil
+  let startY = 0, currentY = 0, pulling = false, refreshing = false;
+  const THRESHOLD = 72; // px pro spuštění obnovy
+
+  function getListArea() { return document.getElementById('list-area'); }
+  function getIndicator() { return document.getElementById('ptr-indicator'); }
+  function getSpinner() { return document.getElementById('ptr-spinner'); }
+  function getText() { return document.getElementById('ptr-text'); }
+
+  document.addEventListener('touchstart', e => {
+    const el = getListArea();
+    if (!el || el.scrollTop > 0) return; // jen na vrchu seznamu
+    // Ignorovat pokud je otevřený modal nebo detail
+    if (document.getElementById('modal-overlay').classList.contains('open')) return;
+    if (document.getElementById('read-overlay').classList.contains('open')) return;
+    startY = e.touches[0].clientY;
+    pulling = true;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!pulling || refreshing) return;
+    currentY = e.touches[0].clientY;
+    const delta = currentY - startY;
+    if (delta <= 0) return;
+    const el = getListArea();
+    if (!el || el.scrollTop > 0) { pulling = false; return; }
+    const ind = getIndicator();
+    const pull = Math.min(delta, THRESHOLD * 1.5);
+    const ratio = Math.min(pull / THRESHOLD, 1);
+    ind.style.height = Math.min(pull * 0.55, 44) + 'px';
+    if (ratio >= 1) {
+      getText().textContent = 'Uvolněte pro obnovení';
+      getSpinner().style.transform = 'rotate(180deg)';
+    } else {
+      getText().textContent = 'Táhněte pro obnovení';
+      getSpinner().style.transform = `rotate(${ratio * 180}deg)`;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', async () => {
+    if (!pulling || refreshing) { pulling = false; return; }
+    pulling = false;
+    const delta = currentY - startY;
+    const ind = getIndicator();
+    if (delta >= THRESHOLD) {
+      refreshing = true;
+      ind.style.height = '44px';
+      getText().textContent = 'Obnovuji…';
+      getSpinner().classList.add('spin');
+      await sbPull();
+      getSpinner().classList.remove('spin');
+      getText().textContent = 'Hotovo ✓';
+      setTimeout(() => {
+        ind.style.height = '0';
+        getSpinner().style.transform = '';
+        refreshing = false;
+      }, 700);
+    } else {
+      ind.style.height = '0';
+      getSpinner().style.transform = '';
+    }
+    currentY = 0; startY = 0;
+  });
+})();
 
 function handleModalOverlayClick(e) {
   if (e.target === document.getElementById('modal-overlay')) closeModal();
@@ -1876,9 +1991,7 @@ async function renameTreeItem(type, id, currentName) {
   if (!name?.trim()) return;
   const table = type === 'folder' ? 'zl_folders' : 'zl_tags';
   try {
-    await fetch(sb.url + `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
-      method: 'PATCH', headers: sbHeaders(), body: JSON.stringify({ name: name.trim() })
-    });
+    await sbRequest('PATCH', `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, { name: name.trim() });
     await sbPull();
   } catch(e) { showToast('Chyba: ' + e.message); }
 }
@@ -1906,9 +2019,8 @@ function openReadView(id) {
   ui.readId = id;
   document.getElementById('read-title').textContent = b.title || b.url || 'Záložka';
   const urlEl = document.getElementById('read-url');
-  urlEl.href = b.url || '#';
+  urlEl.href = safeUrl(b.url) || '#';
   document.getElementById('read-url-text').textContent = b.url || '';
-  // Poznámka – HTML (bezpečné, uložili jsme sami)
   document.getElementById('read-note').innerHTML = b.note || '';
   const tasks = (() => { try { return JSON.parse(b.tasks || '[]'); } catch(e) { return []; } })();
   document.getElementById('read-tasks').innerHTML = tasks.length
@@ -1918,9 +2030,14 @@ function openReadView(id) {
       </div>`).join('')
     : '';
   document.getElementById('read-overlay').classList.add('open');
+  fabHide(); // skrýt FAB při detailu
 }
 
-function closeReadView() { document.getElementById('read-overlay').classList.remove('open'); ui.readId = null; }
+function closeReadView() {
+  document.getElementById('read-overlay').classList.remove('open');
+  ui.readId = null;
+  fabShow(); // zobrazit FAB po zavření detailu
+}
 function editFromRead() { const id = ui.readId; closeReadView(); openModal(id); }
 
 // ============================================================
@@ -2050,15 +2167,7 @@ function autoFetchTitle() {
   }, 500);
 }
 
-// ============================================================
-// PULL TO REFRESH
-// ============================================================
-let pullStartY = 0;
-document.addEventListener('touchstart', e => { pullStartY = e.touches[0].clientY; });
-document.addEventListener('touchend', e => {
-  const el = document.getElementById('list-area');
-  if (el && el.scrollTop === 0 && e.changedTouches[0].clientY - pullStartY > 60) sbPull();
-});
+// Pull-to-refresh je implementován v initPullToRefresh() výše.
 
 // ============================================================
 // KEYBOARD
@@ -2100,7 +2209,9 @@ function showToast(msg) {
 // ============================================================
 // NÁPOVĚDA
 // ============================================================
-const HELP_PASSWORD = 'zalozky2026';
+// Heslo nápovědy – uloženo v localStorage 'zl_help_pwd', výchozí fallback 'zalozky2026'
+// Lze změnit: localStorage.setItem('zl_help_pwd', 'noveHeslo') v konzoli prohlížeče
+function getHelpPassword() { return localStorage.getItem('zl_help_pwd') || 'zalozky2026'; }
 const HELP_KEY = 'zl_help_content';
 let helpEditMode = false;
 let helpEditUnlocked = false;
@@ -2229,7 +2340,7 @@ function closePwdDialog() {
 
 function checkHelpPassword() {
   const val = document.getElementById('pwd-input').value;
-  if (val === HELP_PASSWORD) {
+  if (val === getHelpPassword()) {
     helpEditUnlocked = true;
     closePwdDialog();
     helpEditMode = true;
