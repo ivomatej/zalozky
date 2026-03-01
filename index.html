@@ -18,16 +18,14 @@
   --border2: #d1d5db;
   --blue: #2563eb;
   --blue-bg: #eff6ff;
-  --blue-light: #3b82f6;
   --green: #16a34a;
   --green-bg: #f0fdf4;
   --red: #dc2626;
   --red-bg: #fef2f2;
   --yellow: #d97706;
-  --sidebar-w: 270px;
+  --sidebar-w: 260px;
   --radius: 8px;
   --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
   --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
 }
 body.dark {
@@ -47,57 +45,127 @@ body.dark {
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); transition: background .2s, color .2s; min-height: 100dvh; }
 
-/* AUTH SCREEN */
+/* ── AUTH ─────────────────────────────────────────────────── */
 #auth-screen {
   min-height: 100dvh; display: flex; align-items: center; justify-content: center;
-  background: #f7f8fa; font-family: 'Geist', sans-serif; color: #1a1d23;
+  background: #f0f2f5; font-family: 'Geist', sans-serif; color: #1a1d23;
 }
-.auth-box { background: #fff; border: 1px solid #e4e7ed; border-radius: 12px; padding: 36px; width: 100%; max-width: 400px; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
-.auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
-.auth-logo-icon { width: 36px; height: 36px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 18px; flex-shrink: 0; }
+.auth-box {
+  background: #fff; border: 1px solid #e4e7ed; border-radius: 14px;
+  padding: 36px; width: 100%; max-width: 420px; box-shadow: 0 4px 24px rgba(0,0,0,.09);
+}
+.auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.auth-logo-icon {
+  width: 38px; height: 38px; background: #2563eb; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 20px; flex-shrink: 0;
+}
 .auth-logo span { font-size: 22px; font-weight: 700; color: #1a1d23; }
-.auth-tabs { display: flex; gap: 0; margin-bottom: 24px; border: 1px solid #e4e7ed; border-radius: 8px; overflow: hidden; }
-.auth-tab { flex: 1; padding: 9px; text-align: center; cursor: pointer; font-size: 14px; font-weight: 500; color: #6b7280; background: #f7f8fa; transition: all .15s; }
+
+/* Supabase config */
+.sb-config-box {
+  background: #f7f8fa; border: 1px solid #e4e7ed; border-radius: 10px;
+  padding: 16px; margin-bottom: 20px;
+}
+.sb-config-title {
+  font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase;
+  letter-spacing: .05em; margin-bottom: 12px;
+}
+.sb-status-row {
+  display: flex; align-items: center; gap: 8px; margin-top: 12px;
+  font-size: 13px; font-weight: 500;
+}
+.sb-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; flex-shrink: 0; transition: background .3s; }
+.sb-dot.ok { background: #16a34a; }
+.sb-dot.err { background: #dc2626; }
+.sb-status-text { color: #6b7280; }
+.sb-status-text.ok { color: #16a34a; }
+.sb-status-text.err { color: #dc2626; }
+.sb-test-btn {
+  margin-left: auto; padding: 4px 10px; border: 1px solid #e4e7ed; border-radius: 6px;
+  font-size: 12px; font-family: 'Geist', sans-serif; background: #fff;
+  color: #6b7280; cursor: pointer; transition: all .12s;
+}
+.sb-test-btn:hover { border-color: #2563eb; color: #2563eb; }
+
+.auth-tabs {
+  display: flex; margin-bottom: 22px; border: 1px solid #e4e7ed;
+  border-radius: 9px; overflow: hidden;
+}
+.auth-tab {
+  flex: 1; padding: 9px; text-align: center; cursor: pointer;
+  font-size: 14px; font-weight: 500; color: #6b7280; background: #f7f8fa; transition: all .15s;
+}
 .auth-tab.active { background: #fff; color: #1a1d23; font-weight: 600; }
 .auth-field { margin-bottom: 14px; }
 .auth-field label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 5px; }
-.auth-field input { width: 100%; padding: 9px 12px; border: 1px solid #e4e7ed; border-radius: 8px; font-size: 14px; font-family: 'Geist', sans-serif; outline: none; transition: border .15s; color: #1a1d23; background: #fff; }
+.auth-field input {
+  width: 100%; padding: 9px 12px; border: 1px solid #e4e7ed; border-radius: 8px;
+  font-size: 14px; font-family: 'Geist', sans-serif; outline: none; transition: border .15s;
+  color: #1a1d23; background: #fff;
+}
 .auth-field input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
-.auth-section-title { font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .05em; margin: 18px 0 10px; }
-.auth-btn { width: 100%; padding: 10px; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Geist', sans-serif; cursor: pointer; margin-top: 6px; transition: background .15s; }
+.auth-btn {
+  width: 100%; padding: 10px; background: #2563eb; color: #fff; border: none;
+  border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Geist', sans-serif;
+  cursor: pointer; margin-top: 6px; transition: background .15s;
+}
 .auth-btn:hover { background: #1d4ed8; }
-.auth-error { font-size: 13px; color: #dc2626; margin-top: 10px; text-align: center; }
+.auth-error { font-size: 13px; color: #dc2626; margin-top: 10px; text-align: center; min-height: 18px; }
 .auth-remember { display: flex; align-items: center; gap: 8px; margin: 10px 0; font-size: 13px; color: #6b7280; cursor: pointer; }
 .auth-remember input { width: 14px; height: 14px; cursor: pointer; }
 
-/* APP LAYOUT */
+/* ── APP LAYOUT ───────────────────────────────────────────── */
 #app { display: none; height: 100dvh; overflow: hidden; }
 .layout { display: flex; height: 100%; }
 
-/* SIDEBAR */
+/* ── SIDEBAR ──────────────────────────────────────────────── */
 .sidebar {
   width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg2);
   border-right: 1px solid var(--border); display: flex; flex-direction: column;
-  height: 100%; overflow: hidden; transition: transform .25s ease;
-  z-index: 100;
+  height: 100%; overflow: hidden; transition: transform .25s ease, width .2s ease;
+  z-index: 100; flex-shrink: 0;
 }
-.sidebar-top { padding: 16px 14px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon { width: 30px; height: 30px; background: var(--blue); border-radius: 7px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0; }
-.logo span { font-size: 17px; font-weight: 700; color: var(--text); }
+.sidebar.collapsed { width: 0; min-width: 0; overflow: hidden; }
+.sidebar-top {
+  padding: 13px 12px 11px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; }
+.logo-icon {
+  width: 28px; height: 28px; background: var(--blue); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.logo span { font-size: 16px; font-weight: 700; color: var(--text); white-space: nowrap; }
 .sidebar-nav { padding: 8px 8px 0; flex-shrink: 0; }
-.nav-item { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-radius: var(--radius); cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text2); transition: all .12s; margin-bottom: 1px; user-select: none; }
+.nav-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; border-radius: var(--radius); cursor: pointer;
+  font-size: 13.5px; font-weight: 500; color: var(--text2); transition: all .12s;
+  margin-bottom: 1px; user-select: none;
+}
 .nav-item:hover { background: var(--bg3); color: var(--text); }
 .nav-item.active { background: var(--blue-bg); color: var(--blue); }
 .nav-item .nav-left { display: flex; align-items: center; gap: 8px; }
 .nav-item .nav-count { font-size: 12px; color: var(--text3); font-weight: 400; }
 .nav-item.active .nav-count { color: var(--blue); }
 .sidebar-section { padding: 4px 8px; }
-.section-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px 4px; }
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px 4px;
+}
 .section-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; }
-.section-add { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer; color: var(--text3); font-size: 16px; transition: all .12s; }
+.section-add {
+  width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+  border-radius: 5px; cursor: pointer; color: var(--text3); font-size: 16px; transition: all .12s;
+}
 .section-add:hover { background: var(--bg3); color: var(--text); }
-.tree-item { display: flex; align-items: center; padding: 5px 10px 5px 10px; border-radius: var(--radius); cursor: pointer; font-size: 13px; color: var(--text2); transition: all .12s; user-select: none; gap: 6px; position: relative; }
+.tree-item {
+  display: flex; align-items: center; padding: 5px 8px 5px 8px;
+  border-radius: var(--radius); cursor: pointer; font-size: 13px; color: var(--text2);
+  transition: all .12s; user-select: none; gap: 5px; position: relative;
+}
 .tree-item:hover { background: var(--bg3); color: var(--text); }
 .tree-item.active { background: var(--blue-bg); color: var(--blue); font-weight: 500; }
 .tree-item .tree-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -111,23 +179,41 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .sidebar-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; }
 .sidebar-scroll::-webkit-scrollbar { width: 4px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-.sidebar-bottom { padding: 8px; border-top: 1px solid var(--border); flex-shrink: 0; }
-.sidebar-bottom-item { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-radius: var(--radius); cursor: pointer; font-size: 13px; color: var(--text2); transition: all .12s; }
+
+/* Sidebar bottom – pořadí: user chip → archiv → export */
+.sidebar-bottom { padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); flex-shrink: 0; }
+.sidebar-bottom-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; border-radius: var(--radius); cursor: pointer;
+  font-size: 13px; color: var(--text2); transition: all .12s;
+}
 .sidebar-bottom-item:hover { background: var(--bg3); color: var(--text); }
 .sidebar-bottom-item .sbi-left { display: flex; align-items: center; gap: 8px; }
-.user-chip { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: var(--radius); cursor: pointer; transition: all .12s; }
+.user-chip {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-radius: var(--radius); cursor: pointer; transition: all .12s;
+}
 .user-chip:hover { background: var(--bg3); }
-.user-chip .user-name { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
+.user-chip .user-name { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .user-chip .chevron { font-size: 11px; color: var(--text3); }
-.avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0; }
-.avatar.lg { width: 36px; height: 36px; font-size: 14px; }
+.avatar {
+  width: 28px; height: 28px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 11px;
+  font-weight: 700; color: #fff; flex-shrink: 0; letter-spacing: -.5px;
+}
 
-/* USER PANEL */
-.user-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow-lg); padding: 16px; margin: 4px 8px 8px; display: none; }
+/* ── USER PANEL ───────────────────────────────────────────── */
+.user-panel {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  box-shadow: var(--shadow-lg); padding: 16px; margin: 4px 8px 6px; display: none;
+}
 .user-panel.open { display: block; }
 .up-field { margin-bottom: 12px; }
 .up-field label { display: block; font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
-.up-field input { width: 100%; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); outline: none; }
+.up-field input {
+  width: 100%; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); outline: none;
+}
 .up-field input:focus { border-color: var(--blue); }
 .up-field input[readonly] { background: var(--bg2); color: var(--text3); cursor: default; }
 .color-swatches { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
@@ -139,123 +225,267 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .toggle-switch.on { background: var(--blue); }
 .toggle-switch::after { content: ''; width: 14px; height: 14px; background: #fff; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform .2s; }
 .toggle-switch.on::after { transform: translateX(16px); }
-.logout-btn { width: 100%; padding: 7px; background: transparent; border: 1px solid var(--border); border-radius: 6px; color: var(--text2); font-size: 13px; font-family: 'Geist', sans-serif; cursor: pointer; margin-top: 10px; transition: all .15s; text-align: center; }
+.logout-btn {
+  width: 100%; padding: 7px; background: transparent; border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text2); font-size: 13px; font-family: 'Geist', sans-serif;
+  cursor: pointer; margin-top: 10px; transition: all .15s; text-align: center;
+}
 .logout-btn:hover { background: var(--red-bg); color: var(--red); border-color: var(--red); }
 
-/* MAIN */
-.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); }
-
-/* TOPBAR */
-.topbar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--bg); }
-.hamburger { display: none; width: 32px; height: 32px; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: var(--text2); font-size: 18px; flex-shrink: 0; }
-.hamburger:hover { background: var(--bg3); }
+/* ── TOPBAR ───────────────────────────────────────────────── */
+.topbar {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+  background: var(--bg2); /* stejná barva jako sidebar */
+}
+.sidebar-toggle-btn {
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; cursor: pointer; color: var(--text2); font-size: 17px;
+  transition: all .12s; flex-shrink: 0; border: 1px solid var(--border);
+  background: var(--bg); user-select: none;
+}
+.sidebar-toggle-btn:hover { background: var(--bg3); color: var(--text); }
 .breadcrumb { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
 .search-wrap { position: relative; }
-.search-wrap input { padding: 7px 12px 7px 32px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg2); color: var(--text); outline: none; width: 200px; transition: all .15s; }
-.search-wrap input:focus { border-color: var(--blue); background: var(--bg); width: 240px; box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
-.search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; pointer-events: none; }
-.sort-select { padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg2); color: var(--text); outline: none; cursor: pointer; }
-.btn-new { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: var(--blue); color: #fff; border: none; border-radius: 7px; font-size: 13px; font-weight: 600; font-family: 'Geist', sans-serif; cursor: pointer; transition: background .15s; white-space: nowrap; }
+.search-wrap input {
+  padding: 7px 12px 7px 30px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none; width: 200px; transition: all .15s;
+}
+.search-wrap input:focus { border-color: var(--blue); width: 240px; box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
+.search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 13px; pointer-events: none; }
+.sort-select {
+  padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none; cursor: pointer;
+}
+.btn-new {
+  display: flex; align-items: center; gap: 6px; padding: 7px 14px;
+  background: var(--blue); color: #fff; border: none; border-radius: 7px;
+  font-size: 13px; font-weight: 600; font-family: 'Geist', sans-serif;
+  cursor: pointer; transition: background .15s; white-space: nowrap;
+}
 .btn-new:hover { background: #1d4ed8; }
-.status-bar { display: flex; align-items: center; justify-content: space-between; padding: 5px 16px; border-bottom: 1px solid var(--border); background: var(--bg2); font-size: 12px; color: var(--text3); flex-shrink: 0; }
+.status-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 5px 16px; border-bottom: 1px solid var(--border);
+  background: var(--bg2); font-size: 12px; color: var(--text3); flex-shrink: 0;
+}
 .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #d1d5db; margin-right: 5px; transition: background .3s; }
 .status-dot.ok { background: var(--green); }
 .sync-btn { font-size: 12px; color: var(--blue); cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: background .12s; }
 .sync-btn:hover { background: var(--blue-bg); }
 
-/* BOOKMARK LIST */
-.list-area { flex: 1; overflow-y: auto; padding: 8px; }
+/* ── MAIN ─────────────────────────────────────────────────── */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); min-width: 0; }
+
+/* ── BOOKMARK LIST ────────────────────────────────────────── */
+.list-area { flex: 1; overflow-y: auto; padding: 8px 10px; }
 .list-area::-webkit-scrollbar { width: 5px; }
 .list-area::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 .bookmark-row {
-  display: flex; align-items: center; gap: 12px; padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px;
   border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 5px;
   background: var(--bg); cursor: pointer; transition: all .12s; position: relative;
 }
-.bookmark-row:hover { border-color: var(--border2); box-shadow: var(--shadow); }
-.bm-favicon { width: 28px; height: 28px; border-radius: 6px; background: var(--bg3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+.bookmark-row:hover { border-color: var(--border2); box-shadow: var(--shadow); background: var(--bg2); }
+.bm-favicon {
+  width: 26px; height: 26px; border-radius: 6px; background: var(--bg3);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
+}
 .bm-favicon img { width: 16px; height: 16px; object-fit: contain; }
-.bm-favicon .bm-favicon-fallback { font-size: 13px; color: var(--text3); }
-.bm-content { flex: 1; min-width: 0; }
-.bm-title { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.bm-url { font-size: 12px; color: var(--blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+.bm-favicon-fallback { font-size: 13px; color: var(--text3); }
+.bm-content { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.bm-title { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; max-width: 300px; }
+.bm-url { font-size: 12px; color: var(--blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bm-url:hover { text-decoration: underline; }
+.bm-note-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
 .bm-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.tag-chip { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; }
-.shared-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(37,99,235,.2); white-space: nowrap; }
-.task-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; display: flex; align-items: center; gap: 3px; }
-.task-badge.has-open { background: var(--yellow); background: rgba(217,119,6,.1); color: var(--yellow); border-color: rgba(217,119,6,.2); }
+.tag-chip { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; }
+.shared-badge { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(37,99,235,.2); white-space: nowrap; }
+.task-badge { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; }
+.task-badge.has-open { background: rgba(217,119,6,.1); color: var(--yellow); border-color: rgba(217,119,6,.2); }
 .bm-date { font-size: 12px; color: var(--text3); white-space: nowrap; }
-.bm-open-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; background: transparent; color: var(--text3); font-size: 14px; transition: all .12s; flex-shrink: 0; border: 1px solid transparent; }
-.bm-open-btn:hover { background: var(--bg3); border-color: var(--border); color: var(--blue); }
+/* Tlačítko Upravit v řádku */
+.bm-edit-btn {
+  padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text2); cursor: pointer; transition: all .12s; flex-shrink: 0;
+  white-space: nowrap;
+}
+.bm-edit-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
 .desktop-only { display: flex; }
-.bm-note-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
 .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
 .empty-state p { font-size: 14px; }
 
-/* MODAL */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px; }
+/* ── MODAL ────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 200;
+  display: none; align-items: center; justify-content: center; padding: 12px;
+}
 .modal-overlay.open { display: flex; }
-.modal { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 680px; max-height: 90dvh; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); overflow: hidden; }
-.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.modal-title-input { flex: 1; font-size: 17px; font-weight: 600; background: transparent; border: none; outline: none; color: var(--text); font-family: 'Geist', sans-serif; }
+.modal {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+  width: 100%; max-width: 820px; max-height: 94dvh;
+  display: flex; flex-direction: column; box-shadow: var(--shadow-lg); overflow: hidden;
+}
+.modal-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  background: var(--bg2);
+}
+.modal-title-input {
+  flex: 1; font-size: 17px; font-weight: 600; background: transparent;
+  border: none; outline: none; color: var(--text); font-family: 'Geist', sans-serif;
+}
 .modal-title-input::placeholder { color: var(--text3); }
-.modal-close { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; color: var(--text3); font-size: 18px; transition: all .12s; flex-shrink: 0; }
+.modal-close {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; cursor: pointer; color: var(--text3); font-size: 18px;
+  transition: all .12s; flex-shrink: 0;
+}
 .modal-close:hover { background: var(--bg3); color: var(--text); }
-.modal-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+.modal-body { flex: 1; overflow-y: auto; padding: 18px 22px; }
 .modal-body::-webkit-scrollbar { width: 4px; }
 .modal-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-.modal-footer { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; gap: 8px; }
+.modal-footer {
+  padding: 12px 22px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0; gap: 8px; background: var(--bg2);
+}
 .modal-footer-left { display: flex; gap: 6px; }
 .modal-footer-right { display: flex; gap: 6px; }
-.btn { padding: 7px 16px; border-radius: 7px; font-size: 13px; font-weight: 500; font-family: 'Geist', sans-serif; cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--text2); transition: all .12s; }
+.btn {
+  padding: 7px 16px; border-radius: 7px; font-size: 13px; font-weight: 500;
+  font-family: 'Geist', sans-serif; cursor: pointer; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text2); transition: all .12s;
+}
 .btn:hover { background: var(--bg3); color: var(--text); }
 .btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); font-weight: 600; }
 .btn.primary:hover { background: #1d4ed8; }
+/* Archivovat – šedá, ne červená */
+.btn.archive { color: var(--text2); }
+.btn.archive:hover { background: var(--bg3); color: var(--text); }
 .btn.danger { color: var(--red); }
 .btn.danger:hover { background: var(--red-bg); border-color: var(--red); }
 
-/* MODAL FIELDS */
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.field { margin-bottom: 14px; }
-.field label { display: block; font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 5px; }
-.field input, .field textarea, .field select { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); outline: none; transition: border .15s; }
-.field input:focus, .field textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
-.field textarea { resize: vertical; min-height: 80px; }
-.url-field-wrap { position: relative; }
-.url-open-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--blue); font-size: 13px; cursor: pointer; padding: 2px 6px; border-radius: 4px; transition: background .12s; }
-.url-open-btn:hover { background: var(--blue-bg); }
-.visibility-toggle { display: flex; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
-.vis-opt { flex: 1; padding: 7px; text-align: center; font-size: 13px; cursor: pointer; transition: all .12s; color: var(--text2); }
-.vis-opt.active { background: var(--blue); color: #fff; font-weight: 600; }
+/* ── MODAL FIELDS ─────────────────────────────────────────── */
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .03em; }
+.field input, .field select {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none; transition: border .15s;
+}
+.field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
 
-/* TASKS */
-.tasks-section { margin-top: 6px; }
-.tasks-title { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+/* URL pole – větší, víceřádkové */
+.url-textarea {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none; transition: border .15s; resize: vertical;
+  min-height: 60px; line-height: 1.5; word-break: break-all;
+}
+.url-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
+
+/* Viditelnost – šedé tlačítka */
+.visibility-toggle { display: flex; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
+.vis-opt {
+  flex: 1; padding: 8px; text-align: center; font-size: 13px; cursor: pointer;
+  transition: all .12s; color: var(--text2); background: var(--bg);
+}
+.vis-opt:hover { background: var(--bg3); }
+.vis-opt.active { background: var(--bg3); color: var(--text); font-weight: 600; border-right: 1px solid var(--border); }
+.vis-opt:last-child.active { border-right: none; border-left: 1px solid var(--border); }
+
+/* ── POZNÁMKA EDITOR ──────────────────────────────────────── */
+.note-editor-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.note-toolbar {
+  display: flex; align-items: center; gap: 2px; padding: 6px 8px;
+  border-bottom: 1px solid var(--border); background: var(--bg2); flex-wrap: wrap;
+}
+.note-tb-btn {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border-radius: 5px; cursor: pointer; border: none; background: transparent;
+  font-family: 'Geist', sans-serif; font-size: 13px; color: var(--text2);
+  transition: all .12s; user-select: none;
+}
+.note-tb-btn:hover { background: var(--bg3); color: var(--text); }
+.note-tb-btn.active { background: var(--border2); color: var(--text); }
+.note-tb-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+.note-content {
+  min-height: 110px; max-height: 260px; overflow-y: auto;
+  padding: 10px 14px; outline: none; font-size: 13.5px; line-height: 1.65;
+  color: var(--text); font-family: 'Geist', sans-serif; background: var(--bg);
+}
+.note-content:empty::before { content: attr(data-placeholder); color: var(--text3); }
+.note-content ul, .note-content ol { padding-left: 20px; }
+.note-content b, .note-content strong { font-weight: 700; }
+.note-content i, .note-content em { font-style: italic; }
+.note-content u { text-decoration: underline; }
+
+/* ── ÚKOLY ────────────────────────────────────────────────── */
+.tasks-section { margin-top: 4px; }
+.tasks-title { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .03em; }
 .task-add-row { display: flex; gap: 6px; margin-bottom: 8px; }
-.task-add-row input { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); outline: none; }
+.task-add-row input {
+  flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none;
+}
 .task-add-row input:focus { border-color: var(--blue); }
-.task-add-btn { padding: 7px 12px; background: var(--blue); color: #fff; border: none; border-radius: 6px; font-size: 13px; font-family: 'Geist', sans-serif; cursor: pointer; font-weight: 500; transition: background .12s; white-space: nowrap; }
-.task-add-btn:hover { background: #1d4ed8; }
-.task-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; transition: background .12s; }
+/* Přidat btn – šedé */
+.task-add-btn {
+  padding: 7px 12px; background: var(--bg3); color: var(--text2);
+  border: 1px solid var(--border); border-radius: 6px; font-size: 13px;
+  font-family: 'Geist', sans-serif; cursor: pointer; font-weight: 500;
+  transition: all .12s; white-space: nowrap;
+}
+.task-add-btn:hover { background: var(--border2); color: var(--text); }
+.task-item { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 6px; transition: background .12s; }
 .task-item:hover { background: var(--bg2); }
-.task-checkbox { width: 16px; height: 16px; cursor: pointer; accent-color: var(--blue); flex-shrink: 0; }
+.task-checkbox { width: 15px; height: 15px; cursor: pointer; accent-color: var(--blue); flex-shrink: 0; }
 .task-text { flex: 1; font-size: 13px; color: var(--text); }
 .task-text.done { text-decoration: line-through; color: var(--text3); }
-.task-del { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; color: var(--text3); font-size: 12px; opacity: 0; transition: all .12s; }
+.task-move-btns { display: flex; flex-direction: column; gap: 1px; flex-shrink: 0; }
+.task-move-btn {
+  width: 18px; height: 14px; display: flex; align-items: center; justify-content: center;
+  border-radius: 3px; cursor: pointer; color: var(--text3); font-size: 9px;
+  transition: all .12s; border: none; background: transparent; line-height: 1;
+}
+.task-move-btn:hover { background: var(--bg3); color: var(--text); }
+.task-del {
+  width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; cursor: pointer; color: var(--text3); font-size: 13px;
+  opacity: 0; transition: all .12s;
+}
 .task-item:hover .task-del { opacity: 1; }
 .task-del:hover { background: var(--red-bg); color: var(--red); }
 
-/* DROPDOWN */
+/* ── DROPDOWN ─────────────────────────────────────────────── */
 .dropdown-wrap { position: relative; }
-.dropdown-trigger { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; cursor: pointer; background: var(--bg); color: var(--text); transition: border .15s; gap: 6px; }
+.dropdown-trigger {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; cursor: pointer; background: var(--bg); color: var(--text);
+  transition: border .15s; gap: 6px; min-height: 38px;
+}
 .dropdown-trigger:hover { border-color: var(--border2); }
 .dropdown-trigger .selected-items { flex: 1; display: flex; flex-wrap: wrap; gap: 4px; min-height: 18px; }
 .dropdown-trigger .placeholder { color: var(--text3); }
-.dropdown-menu { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-lg); z-index: 300; max-height: 220px; overflow-y: auto; }
+.dropdown-menu {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow-lg);
+  z-index: 300; max-height: 220px; overflow-y: auto;
+}
 .dropdown-search { padding: 8px; border-bottom: 1px solid var(--border); }
-.dropdown-search input { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg2); color: var(--text); outline: none; }
+.dropdown-search input {
+  width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg2);
+  color: var(--text); outline: none;
+}
 .dropdown-item { display: flex; align-items: center; gap: 8px; padding: 7px 12px; font-size: 13px; cursor: pointer; color: var(--text); transition: background .1s; }
 .dropdown-item:hover { background: var(--bg2); }
 .dropdown-item.selected { color: var(--blue); }
@@ -263,54 +493,73 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .dropdown-item.indent1 { padding-left: 24px; }
 .dropdown-item.indent2 { padding-left: 36px; }
 
-/* TOAST */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity .2s; pointer-events: none; white-space: nowrap; }
+/* ── TOAST ────────────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; z-index: 999; opacity: 0;
+  transition: opacity .2s; pointer-events: none; white-space: nowrap;
+}
 .toast.show { opacity: 1; }
 
-/* FAB */
-.fab { display: none; position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); right: 20px; width: 52px; height: 52px; background: var(--blue); border-radius: 50%; box-shadow: var(--shadow-lg); border: none; color: #fff; font-size: 24px; cursor: pointer; z-index: 150; align-items: center; justify-content: center; transition: transform .15s; }
+/* ── FAB ──────────────────────────────────────────────────── */
+.fab {
+  display: none; position: fixed; bottom: calc(20px + env(safe-area-inset-bottom));
+  right: 20px; width: 52px; height: 52px; background: var(--blue); border-radius: 50%;
+  box-shadow: var(--shadow-lg); border: none; color: #fff; font-size: 24px;
+  cursor: pointer; z-index: 150; align-items: center; justify-content: center;
+  transition: transform .15s;
+}
 .fab:hover { transform: scale(1.05); }
 .fab:active { transform: scale(.97); }
 
-/* SIDEBAR OVERLAY */
+/* ── SIDEBAR OVERLAY (mobile) ─────────────────────────────── */
 .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 90; }
 
-/* INLINE EDIT */
-.inline-edit { background: var(--bg); border: 1px solid var(--blue); border-radius: 5px; padding: 3px 7px; font-size: 13px; font-family: 'Geist', sans-serif; color: var(--text); outline: none; width: 100%; }
-
-/* READ VIEW (mobile) */
+/* ── MOBILE READ VIEW ─────────────────────────────────────── */
 .read-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 200; display: none; flex-direction: column; overflow: hidden; }
 .read-overlay.open { display: flex; }
-.read-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.read-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--bg2); }
 .read-back { font-size: 22px; color: var(--text2); cursor: pointer; }
 .read-title { flex: 1; font-size: 16px; font-weight: 600; color: var(--text); }
-.read-edit-btn { padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--text2); background: var(--bg); font-family: 'Geist', sans-serif; }
+.read-edit-btn {
+  padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px;
+  font-size: 13px; cursor: pointer; color: var(--text2); background: var(--bg);
+  font-family: 'Geist', sans-serif;
+}
 .read-body { flex: 1; overflow-y: auto; padding: 20px 16px; }
 .read-url-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--blue); text-decoration: none; word-break: break-all; margin-bottom: 14px; }
 .read-url-link:hover { text-decoration: underline; }
-.read-note { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 16px; white-space: pre-wrap; }
+.read-note { font-size: 14px; color: var(--text); line-height: 1.6; margin-bottom: 16px; }
+.read-note ul, .read-note ol { padding-left: 20px; }
 .read-tasks { margin-top: 8px; }
 
-@media (max-width: 680px) {
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 720px) {
   .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-110%); }
-  .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .sidebar.open { transform: translateX(0) !important; box-shadow: var(--shadow-lg); }
+  .sidebar.collapsed { transform: translateX(-110%); }
   .sidebar-overlay.open { display: block; }
-  .hamburger { display: flex; }
   .fab { display: flex; }
   .btn-new { display: none; }
   .desktop-only { display: none !important; }
-  .search-wrap input { width: 140px; }
+  .search-wrap input { width: 130px; }
   .search-wrap input:focus { width: 160px; }
   .field-row { grid-template-columns: 1fr; }
   .modal { max-height: 100dvh; border-radius: 0; max-width: 100%; margin: 0; }
   .modal-overlay { padding: 0; align-items: flex-end; }
   .modal-overlay.open .modal { border-radius: 16px 16px 0 0; max-height: 95dvh; }
 }
+@media (min-width: 721px) {
+  /* Desktop: sidebar-toggle btn vždy viditelný v topbaru */
+}
 </style>
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- ═══════════════════════════════════════════════════════════
+     AUTH SCREEN
+═══════════════════════════════════════════════════════════ -->
 <div id="auth-screen">
   <div class="auth-box">
     <div class="auth-logo">
@@ -318,28 +567,32 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
       <span>Záložky</span>
     </div>
 
-    <div id="auth-config-section">
-      <div class="auth-section-title">Připojení k Supabase</div>
+    <!-- Supabase config -->
+    <div id="auth-config-section" class="sb-config-box">
+      <div class="sb-config-title">Připojení k Supabase</div>
       <div class="auth-field">
         <label>Supabase URL</label>
-        <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co">
+        <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" oninput="resetSbStatus()">
       </div>
-      <div class="auth-field">
+      <div class="auth-field" style="margin-bottom:8px">
         <label>Anon Key</label>
-        <input type="password" id="sb-key" placeholder="eyJhbGci...">
+        <input type="password" id="sb-key" placeholder="eyJhbGci..." oninput="resetSbStatus()">
       </div>
-      <button class="auth-btn" onclick="saveSbConfig()" style="margin-bottom:12px">Uložit připojení</button>
-      <div style="border-top:1px solid #e4e7ed;"></div>
+      <div class="sb-status-row">
+        <div class="sb-dot" id="sb-dot"></div>
+        <span class="sb-status-text" id="sb-status-text">Nezkontrolováno</span>
+        <button class="sb-test-btn" onclick="testSbConnection()">Ověřit připojení</button>
+      </div>
     </div>
 
-    <div class="auth-tabs" style="margin-top:16px">
+    <div class="auth-tabs">
       <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Přihlásit se</div>
       <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Registrovat se</div>
     </div>
 
     <div id="login-form">
       <div class="auth-field"><label>E-mail</label><input type="email" id="login-email" placeholder="vas@email.cz"></div>
-      <div class="auth-field"><label>Heslo</label><input type="password" id="login-password" placeholder="Heslo"></div>
+      <div class="auth-field"><label>Heslo</label><input type="password" id="login-password" placeholder="Heslo" onkeydown="if(event.key==='Enter') doLogin()"></div>
       <label class="auth-remember"><input type="checkbox" id="remember-me"> Zapamatovat přihlášení (30 dní)</label>
       <button class="auth-btn" onclick="doLogin()">Přihlásit se</button>
     </div>
@@ -355,10 +608,11 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   </div>
 </div>
 
-<!-- APP -->
+<!-- ═══════════════════════════════════════════════════════════
+     APP
+═══════════════════════════════════════════════════════════ -->
 <div id="app">
   <div class="layout">
-    <!-- SIDEBAR OVERLAY (mobile) -->
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
     <!-- SIDEBAR -->
@@ -403,7 +657,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
         </div>
       </div>
 
-      <!-- USER PANEL -->
+      <!-- USER PANEL (expandovatelný) -->
       <div class="user-panel" id="user-panel">
         <div class="up-field">
           <label>Zobrazované jméno</label>
@@ -424,22 +678,19 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
         <button class="logout-btn" onclick="doLogout()">Odhlásit se</button>
       </div>
 
+      <!-- SIDEBAR BOTTOM: user chip → archiv → export CSV -->
       <div class="sidebar-bottom">
-        <div class="sidebar-bottom-item" onclick="setView('archive')">
-          <div class="sbi-left">📦 Archiv</div>
-          <span class="nav-count" id="cnt-archive">0</span>
-        </div>
-        <div class="sidebar-bottom-item" onclick="doExportJSON()">
-          <div class="sbi-left">⬇ Export JSON</div>
-        </div>
-        <div class="sidebar-bottom-item" onclick="document.getElementById('import-file').click()">
-          <div class="sbi-left">⬆ Import JSON</div>
-        </div>
-        <input type="file" id="import-file" accept=".json" style="display:none" onchange="doImport(event)">
         <div class="user-chip" onclick="toggleUserPanel()">
           <div class="avatar" id="sidebar-avatar"></div>
           <span class="user-name" id="sidebar-username">...</span>
           <span class="chevron">▾</span>
+        </div>
+        <div class="sidebar-bottom-item" onclick="setView('archive')">
+          <div class="sbi-left">📦 Archiv</div>
+          <span class="nav-count" id="cnt-archive">0</span>
+        </div>
+        <div class="sidebar-bottom-item" onclick="doExportCSV()">
+          <div class="sbi-left">⬇ Export do CSV</div>
         </div>
       </div>
     </div>
@@ -447,7 +698,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
     <!-- MAIN -->
     <div class="main">
       <div class="topbar">
-        <div class="hamburger" onclick="openSidebar()">☰</div>
+        <!-- Burger/toggle tlačítko viditelné vždy na desktopu i mobilu -->
+        <div class="sidebar-toggle-btn" id="sidebar-toggle-btn" onclick="toggleSidebar()" title="Zobrazit/skrýt menu">☰</div>
         <div class="breadcrumb" id="topbar-title">Všechny záložky</div>
         <div class="search-wrap">
           <span class="search-icon">🔍</span>
@@ -477,7 +729,9 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   </div>
 </div>
 
-<!-- BOOKMARK MODAL -->
+<!-- ═══════════════════════════════════════════════════════════
+     BOOKMARK MODAL
+═══════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-header">
@@ -485,15 +739,13 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
       <div class="modal-close" onclick="closeModal()">×</div>
     </div>
     <div class="modal-body">
+      <!-- URL – textarea, zalamuje se -->
       <div class="field">
         <label>URL adresa</label>
-        <div class="url-field-wrap">
-          <input type="url" id="modal-url" placeholder="https://" oninput="autoFetchTitle()">
-          <span class="url-open-btn" onclick="openUrl()">↗</span>
-        </div>
+        <textarea class="url-textarea" id="modal-url" placeholder="https://" rows="2" oninput="autoFetchTitle()"></textarea>
       </div>
       <div class="field-row">
-        <div class="field">
+        <div class="field" style="margin-bottom:0">
           <label>Složka</label>
           <div class="dropdown-wrap" id="folder-dropdown-wrap">
             <div class="dropdown-trigger" onclick="toggleDropdown('folder')">
@@ -506,7 +758,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
             </div>
           </div>
         </div>
-        <div class="field">
+        <div class="field" style="margin-bottom:0">
           <label>Štítky</label>
           <div class="dropdown-wrap" id="tag-dropdown-wrap">
             <div class="dropdown-trigger" onclick="toggleDropdown('tag')">
@@ -520,21 +772,31 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
           </div>
         </div>
       </div>
-      <div class="field">
+      <div class="field" style="margin-top:16px">
         <label>Viditelnost</label>
         <div class="visibility-toggle">
           <div class="vis-opt active" id="vis-private" onclick="setVisibility('private')">🔒 Soukromá</div>
           <div class="vis-opt" id="vis-shared" onclick="setVisibility('shared')">👥 Sdílená</div>
         </div>
       </div>
+      <!-- Poznámka s formátováním -->
       <div class="field">
         <label>Poznámka</label>
-        <textarea id="modal-note" placeholder="Volitelná poznámka k záložce..."></textarea>
-      </div>
-      <div class="tasks-section">
-        <div class="tasks-title">
-          <span>✅ Úkoly</span>
+        <div class="note-editor-wrap">
+          <div class="note-toolbar" id="note-toolbar">
+            <button class="note-tb-btn" title="Tučné (Ctrl+B)" onmousedown="event.preventDefault();execNote('bold')"><b>B</b></button>
+            <button class="note-tb-btn" title="Kurzíva (Ctrl+I)" onmousedown="event.preventDefault();execNote('italic')"><i>I</i></button>
+            <button class="note-tb-btn" title="Podtržení (Ctrl+U)" onmousedown="event.preventDefault();execNote('underline')"><u>U</u></button>
+            <div class="note-tb-sep"></div>
+            <button class="note-tb-btn" title="Odrážkový seznam" onmousedown="event.preventDefault();execNote('insertUnorderedList')">• —</button>
+            <button class="note-tb-btn" title="Číslovaný seznam" onmousedown="event.preventDefault();execNote('insertOrderedList')">1.</button>
+          </div>
+          <div class="note-content" id="modal-note" contenteditable="true" data-placeholder="Volitelná poznámka k záložce..."></div>
         </div>
+      </div>
+      <!-- Úkoly -->
+      <div class="tasks-section">
+        <div class="tasks-title">✅ Úkoly</div>
         <div class="task-add-row">
           <input type="text" id="task-input" placeholder="Přidat úkol..." onkeydown="taskKeydown(event)">
           <button class="task-add-btn" onclick="addTask()">Přidat</button>
@@ -544,7 +806,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
     </div>
     <div class="modal-footer">
       <div class="modal-footer-left">
-        <button class="btn danger" id="btn-archive" onclick="archiveBookmark()">Archivovat</button>
+        <button class="btn archive" id="btn-archive" onclick="archiveBookmark()">Archivovat</button>
         <button class="btn danger" id="btn-delete" onclick="deleteBookmark()">Smazat</button>
       </div>
       <div class="modal-footer-right">
@@ -569,10 +831,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
-
-<!-- FAB -->
 <button class="fab" onclick="openModal()">+</button>
 
 <script>
@@ -599,12 +858,13 @@ let ui = {
   readId: null,
   userPanelOpen: false,
   activeDropdown: null,
+  sidebarCollapsed: false,
 };
 
 const AVATAR_COLORS = ['#2563eb','#16a34a','#dc2626','#d97706','#7c3aed','#db2777','#0891b2','#65a30d','#9f1239','#1d4ed8'];
 
 // ============================================================
-// SUPABASE CONFIG
+// SUPABASE CONFIG + TEST
 // ============================================================
 function loadSbConfig() {
   try {
@@ -614,13 +874,49 @@ function loadSbConfig() {
 }
 
 function saveSbConfig() {
-  const url = document.getElementById('sb-url').value.trim().replace(/\/$/, '');
-  const key = document.getElementById('sb-key').value.trim();
-  if (!url || !key) { showAuthError('Vyplňte URL a Anon Key.'); return; }
+  const url = (document.getElementById('sb-url').value || '').trim().replace(/\/$/, '');
+  const key = (document.getElementById('sb-key').value || '').trim();
+  if (!url || !key) return;
   sb.url = url; sb.key = key;
   localStorage.setItem('zl_sb_cfg', JSON.stringify({ url, key }));
-  showAuthError('');
-  showToast('Připojení uloženo');
+}
+
+function resetSbStatus() {
+  const dot = document.getElementById('sb-dot');
+  const txt = document.getElementById('sb-status-text');
+  if (dot) { dot.className = 'sb-dot'; }
+  if (txt) { txt.className = 'sb-status-text'; txt.textContent = 'Nezkontrolováno'; }
+}
+
+async function testSbConnection() {
+  const url = (document.getElementById('sb-url').value || '').trim().replace(/\/$/, '');
+  const key = (document.getElementById('sb-key').value || '').trim();
+  const dot = document.getElementById('sb-dot');
+  const txt = document.getElementById('sb-status-text');
+
+  if (!url || !key) {
+    dot.className = 'sb-dot err'; txt.className = 'sb-status-text err';
+    txt.textContent = 'Vyplňte URL a Anon Key'; return;
+  }
+
+  txt.textContent = 'Ověřuji...'; dot.className = 'sb-dot';
+
+  try {
+    const res = await fetch(url + '/rest/v1/', { headers: { 'apikey': key, 'Authorization': 'Bearer ' + key } });
+    if (res.ok || res.status === 200 || res.status === 404) {
+      // 404 je ok – endpoint existuje, jen tabulka ne
+      dot.className = 'sb-dot ok'; txt.className = 'sb-status-text ok';
+      txt.textContent = 'Připojeno ✓';
+      sb.url = url; sb.key = key;
+      localStorage.setItem('zl_sb_cfg', JSON.stringify({ url, key }));
+    } else {
+      dot.className = 'sb-dot err'; txt.className = 'sb-status-text err';
+      txt.textContent = 'Chyba: ' + res.status;
+    }
+  } catch(e) {
+    dot.className = 'sb-dot err'; txt.className = 'sb-status-text err';
+    txt.textContent = 'Nelze se připojit';
+  }
 }
 
 function sbHeaders(extra = {}) {
@@ -637,6 +933,19 @@ async function sbRequest(method, path, body) {
   return null;
 }
 
+async function sbUpsertRow(table, row) {
+  const res = await fetch(sb.url + `/rest/v1/${table}`, {
+    method: 'POST',
+    headers: { ...sbHeaders(), 'Prefer': 'resolution=merge-duplicates' },
+    body: JSON.stringify(row)
+  });
+  if (!res.ok) { const t = await res.text(); throw new Error(t); }
+}
+
+async function sbDelete(table, id) {
+  return sbRequest('DELETE', `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, null);
+}
+
 // ============================================================
 // AUTH
 // ============================================================
@@ -646,15 +955,14 @@ function switchAuthTab(tab) {
   document.getElementById('login-form').style.display = tab === 'login' ? '' : 'none';
   document.getElementById('register-form').style.display = tab === 'register' ? '' : 'none';
   document.getElementById('login-password').value = '';
-  document.getElementById('reg-password').value = '';
+  if (document.getElementById('reg-password')) document.getElementById('reg-password').value = '';
 }
 
-function showAuthError(msg) {
-  document.getElementById('auth-error').textContent = msg;
-}
+function showAuthError(msg) { document.getElementById('auth-error').textContent = msg; }
 
 async function doLogin() {
-  if (!sb.url || !sb.key) { showAuthError('Nejprve uložte připojení k Supabase.'); return; }
+  saveSbConfig();
+  if (!sb.url || !sb.key) { showAuthError('Nejprve vyplňte a ověřte připojení k Supabase.'); return; }
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
   if (!email || !password) { showAuthError('Vyplňte e-mail a heslo.'); return; }
@@ -673,7 +981,8 @@ async function doLogin() {
 }
 
 async function doRegister() {
-  if (!sb.url || !sb.key) { showAuthError('Nejprve uložte připojení k Supabase.'); return; }
+  saveSbConfig();
+  if (!sb.url || !sb.key) { showAuthError('Nejprve vyplňte a ověřte připojení k Supabase.'); return; }
   const name = document.getElementById('reg-name').value.trim();
   const email = document.getElementById('reg-email').value.trim();
   const password = document.getElementById('reg-password').value;
@@ -690,8 +999,7 @@ async function doRegister() {
       localStorage.setItem('zl_session', JSON.stringify({ token: authToken, expires: Date.now() + 3600000 }));
       await startApp(data.user);
     } else {
-      showAuthError('');
-      switchAuthTab('login');
+      showAuthError(''); switchAuthTab('login');
       showToast('Potvrďte e-mail a přihlaste se.');
     }
   } catch(e) { showAuthError('Chyba: ' + e.message); }
@@ -712,8 +1020,7 @@ async function tryRestoreSession() {
 }
 
 function doLogout() {
-  authToken = null;
-  localStorage.removeItem('zl_session');
+  authToken = null; localStorage.removeItem('zl_session');
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
 }
@@ -725,21 +1032,21 @@ async function startApp(user) {
   currentUser.id = user.id;
   currentUser.email = user.email;
   currentUser.name = (user.user_metadata && user.user_metadata.display_name) || user.email.split('@')[0];
-  // load color from localStorage cache
   const cachedColor = localStorage.getItem('zl_avatar_color_' + user.id);
   if (cachedColor) currentUser.color = cachedColor;
 
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
 
-  // Theme
   const savedTheme = localStorage.getItem('zl_theme');
   if (savedTheme === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-toggle').classList.add('on'); }
 
+  // Restore sidebar state
+  const sc = localStorage.getItem('zl_sidebar_collapsed');
+  if (sc === '1' && window.innerWidth > 720) { collapseSidebar(true); }
+
   renderUserPanel();
   await sbPull();
-
-  // Auto refresh
   setInterval(sbPull, 30000);
 }
 
@@ -761,7 +1068,6 @@ async function sbPull() {
     state.bookmarks = bookmarks || [];
     allUsers = {};
     (profiles || []).forEach(p => { allUsers[p.id] = { name: p.display_name || p.email, color: p.avatar_color || AVATAR_COLORS[0] }; });
-    // update current user color from DB
     if (allUsers[currentUser.id]) {
       currentUser.color = allUsers[currentUser.id].color || currentUser.color;
       localStorage.setItem('zl_avatar_color_' + currentUser.id, currentUser.color);
@@ -771,7 +1077,6 @@ async function sbPull() {
     renderAll();
   } catch(e) {
     setStatus(false, 'Chyba připojení');
-    // fallback to cache
     try {
       const c = JSON.parse(localStorage.getItem('zl_state') || '{}');
       if (c.bookmarks) { state = c; renderAll(); }
@@ -785,26 +1090,8 @@ function setStatus(ok, text) {
   document.getElementById('status-text').textContent = text;
 }
 
-async function sbUpsert(table, data) {
-  return sbRequest('POST', `/rest/v1/${table}`, data.length !== undefined ? data : [data]);
-  // Supabase upsert via Prefer header
-}
-
-async function sbUpsertRow(table, row) {
-  const res = await fetch(sb.url + `/rest/v1/${table}`, {
-    method: 'POST',
-    headers: { ...sbHeaders(), 'Prefer': 'resolution=merge-duplicates' },
-    body: JSON.stringify(row)
-  });
-  if (!res.ok) { const t = await res.text(); throw new Error(t); }
-}
-
-async function sbDelete(table, id) {
-  return sbRequest('DELETE', `/rest/v1/${table}?id=eq.${id}`, null);
-}
-
 // ============================================================
-// RENDER
+// RENDER ALL
 // ============================================================
 function renderAll() {
   renderSidebarCounts();
@@ -815,7 +1102,7 @@ function renderAll() {
 }
 
 function esc(s) {
-  if (!s) return '';
+  if (s == null) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
@@ -826,13 +1113,14 @@ function fmtDate(ts) {
 }
 
 function getDomain(url) {
-  try { return new URL(url).hostname.replace('www.',''); } catch(e) { return ''; }
+  try { return new URL(url).hostname.replace('www.',''); } catch(e) { return url || ''; }
 }
 
 function getFaviconUrl(url) {
   try { const u = new URL(url); return `https://www.google.com/s2/favicons?sz=32&domain=${u.hostname}`; } catch(e) { return ''; }
 }
 
+// ── COUNTS ──────────────────────────────────────────────────
 function renderSidebarCounts() {
   const active = state.bookmarks.filter(b => !b.archived);
   document.getElementById('cnt-all').textContent = active.length;
@@ -841,15 +1129,9 @@ function renderSidebarCounts() {
   document.getElementById('cnt-archive').textContent = state.bookmarks.filter(b => b.archived).length;
 }
 
-function renderFoldersTree() {
-  const el = document.getElementById('folders-tree');
-  el.innerHTML = renderTreeItems(state.folders, null, 'folder');
-}
-
-function renderTagsTree() {
-  const el = document.getElementById('tags-tree');
-  el.innerHTML = renderTreeItems(state.tags, null, 'tag');
-}
+// ── TREE ────────────────────────────────────────────────────
+function renderFoldersTree() { document.getElementById('folders-tree').innerHTML = renderTreeItems(state.folders, null, 'folder'); }
+function renderTagsTree() { document.getElementById('tags-tree').innerHTML = renderTreeItems(state.tags, null, 'tag'); }
 
 function renderTreeItems(items, parentId, type) {
   const children = items.filter(i => i.parent_id === parentId);
@@ -857,10 +1139,13 @@ function renderTreeItems(items, parentId, type) {
   return children.map(item => {
     const hasChildren = items.some(i => i.parent_id === item.id);
     const expanded = type === 'folder' ? ui.expandedFolders.has(item.id) : ui.expandedTags.has(item.id);
-    const isActive = type === 'folder' ? (ui.currentView === 'folder' && ui.currentFolderId === item.id) : (ui.currentView === 'tag' && ui.currentTagId === item.id);
+    const isActive = type === 'folder' ? (ui.currentView === 'folder' && ui.currentFolderId === item.id)
+                                       : (ui.currentView === 'tag' && ui.currentTagId === item.id);
     return `<div>
       <div class="tree-item ${isActive ? 'active' : ''}" onclick="selectTree('${type}','${esc(item.id)}')">
-        ${hasChildren ? `<span class="tree-expand ${expanded ? 'open' : ''}" onclick="event.stopPropagation();toggleTreeExpand('${type}','${esc(item.id)}')">▶</span>` : '<span style="width:14px;display:inline-block"></span>'}
+        ${hasChildren
+          ? `<span class="tree-expand ${expanded ? 'open' : ''}" onclick="event.stopPropagation();toggleTreeExpand('${type}','${esc(item.id)}')">▶</span>`
+          : '<span style="width:14px;display:inline-block"></span>'}
         <span class="tree-name">${type === 'folder' ? '📁' : '🏷'} ${esc(item.name)}</span>
         <div class="tree-actions">
           <span class="tree-action-btn" onclick="event.stopPropagation();renameTreeItem('${type}','${esc(item.id)}','${esc(item.name)}')" title="Přejmenovat">✎</span>
@@ -883,18 +1168,12 @@ function selectTree(type, id) {
   ui.currentView = type;
   if (type === 'folder') ui.currentFolderId = id;
   else ui.currentTagId = id;
-  updateNavActive();
-  renderList();
-  closeSidebar();
+  updateNavActive(); renderList(); closeSidebar();
 }
 
 function setView(v) {
-  ui.currentView = v;
-  ui.currentFolderId = null;
-  ui.currentTagId = null;
-  updateNavActive();
-  renderList();
-  closeSidebar();
+  ui.currentView = v; ui.currentFolderId = null; ui.currentTagId = null;
+  updateNavActive(); renderList(); closeSidebar();
 }
 
 function updateNavActive() {
@@ -902,9 +1181,7 @@ function updateNavActive() {
     const el = document.getElementById('nav-' + v);
     if (el) el.classList.toggle('active', ui.currentView === v);
   });
-  // Update topbar title
-  const titles = { all: 'Všechny záložky', mine: 'Moje záložky', shared: 'Sdílené záložky', archive: 'Archiv', folder: '', tag: '' };
-  let title = titles[ui.currentView] || '';
+  let title = { all: 'Všechny záložky', mine: 'Moje záložky', shared: 'Sdílené záložky', archive: 'Archiv' }[ui.currentView] || '';
   if (ui.currentView === 'folder' && ui.currentFolderId) {
     const f = state.folders.find(x => x.id === ui.currentFolderId);
     title = f ? '📁 ' + f.name : 'Složka';
@@ -914,10 +1191,10 @@ function updateNavActive() {
     title = t ? '🏷 ' + t.name : 'Štítek';
   }
   document.getElementById('topbar-title').textContent = title;
-  renderFoldersTree();
-  renderTagsTree();
+  renderFoldersTree(); renderTagsTree();
 }
 
+// ── LIST ────────────────────────────────────────────────────
 function getFilteredBookmarks() {
   let list = [...state.bookmarks];
   const q = document.getElementById('search-input').value.toLowerCase().trim();
@@ -927,12 +1204,14 @@ function getFilteredBookmarks() {
   else if (ui.currentView === 'shared') list = list.filter(b => !b.archived && b.visibility === 'shared');
   else if (ui.currentView === 'archive') list = list.filter(b => b.archived);
   else if (ui.currentView === 'folder') list = list.filter(b => !b.archived && b.folder_id === ui.currentFolderId);
-  else if (ui.currentView === 'tag') list = list.filter(b => !b.archived && (() => { try { const tags = JSON.parse(b.tag_ids || '[]'); return tags.includes(ui.currentTagId); } catch(e) { return false; } })());
+  else if (ui.currentView === 'tag') list = list.filter(b => {
+    try { return JSON.parse(b.tag_ids || '[]').includes(ui.currentTagId); } catch(e) { return false; }
+  });
 
   if (q) list = list.filter(b =>
-    (b.title || '').toLowerCase().includes(q) ||
-    (b.url || '').toLowerCase().includes(q) ||
-    (b.note || '').toLowerCase().includes(q)
+    (b.title||'').toLowerCase().includes(q) ||
+    (b.url||'').toLowerCase().includes(q) ||
+    (b.note||'').toLowerCase().includes(q)
   );
 
   const sort = document.getElementById('sort-select').value;
@@ -940,49 +1219,54 @@ function getFilteredBookmarks() {
   else if (sort === 'oldest') list.sort((a,b) => (a.created||0) - (b.created||0));
   else if (sort === 'az') list.sort((a,b) => (a.title||'').localeCompare(b.title||''));
   else if (sort === 'za') list.sort((a,b) => (b.title||'').localeCompare(a.title||''));
-
   return list;
 }
 
 function renderList() {
   const list = getFilteredBookmarks();
   const el = document.getElementById('list-area');
-
   if (!list.length) {
     el.innerHTML = '<div class="empty-state"><div class="empty-icon">🔖</div><p>Žádné záložky.</p></div>';
     return;
   }
-
   el.innerHTML = list.map(b => {
     const domain = getDomain(b.url || '');
     const faviconUrl = getFaviconUrl(b.url || '');
     const tags = (() => { try { return JSON.parse(b.tag_ids || '[]'); } catch(e) { return []; } })();
-    const tagNames = tags.slice(0,2).map(tid => { const t = state.tags.find(x => x.id === tid); return t ? `<span class="tag-chip">${esc(t.name)}</span>` : ''; }).join('');
+    const tagNames = tags.slice(0,2).map(tid => {
+      const t = state.tags.find(x => x.id === tid);
+      return t ? `<span class="tag-chip">${esc(t.name)}</span>` : '';
+    }).join('');
     const tasks = (() => { try { return JSON.parse(b.tasks || '[]'); } catch(e) { return []; } })();
     const openTasks = tasks.filter(t => !t.done).length;
-    const taskBadge = tasks.length ? `<span class="task-badge ${openTasks > 0 ? 'has-open' : ''}">✅ ${tasks.filter(t=>t.done).length}/${tasks.length}</span>` : '';
+    const taskBadge = tasks.length
+      ? `<span class="task-badge ${openTasks > 0 ? 'has-open' : ''}">✅ ${tasks.filter(t=>t.done).length}/${tasks.length}</span>`
+      : '';
     const author = allUsers[b.created_by] || {};
     const avatarColor = author.color || strColor(b.created_by || '');
     const initials = getInitials(author.name || '?');
-    const notePreview = (b.note || '').replace(/\n/g,' ').substring(0, 80);
+    // Náhled poznámky – strip HTML tagů
+    const noteText = (b.note || '').replace(/<[^>]+>/g, '').replace(/\n/g,' ').substring(0, 90);
 
     return `<div class="bookmark-row" onclick="rowClick('${esc(b.id)}')">
       <div class="bm-favicon">
-        ${faviconUrl ? `<img src="${esc(faviconUrl)}" onerror="this.parentNode.innerHTML='<span class=bm-favicon-fallback>🔖</span>'" alt="">` : '<span class="bm-favicon-fallback">🔖</span>'}
+        ${faviconUrl
+          ? `<img src="${esc(faviconUrl)}" onerror="this.parentNode.innerHTML='<span class=bm-favicon-fallback>🔖</span>'" alt="">`
+          : '<span class="bm-favicon-fallback">🔖</span>'}
       </div>
       <div class="bm-content">
-        <div class="bm-title">${esc(b.title || b.url || 'Bez názvu')}</div>
-        <div class="bm-url" onclick="event.stopPropagation();window.open('${esc(b.url)}','_blank','')">${esc(domain)}</div>
+        <span class="bm-title">${esc(b.title || b.url || 'Bez názvu')}</span>
+        <span class="bm-url desktop-only">${esc(domain)}</span>
+        ${noteText ? `<span class="bm-note-preview desktop-only">${esc(noteText)}</span>` : ''}
       </div>
-      <div class="bm-meta desktop-only">
-        ${notePreview ? `<span class="bm-note-preview">${esc(notePreview)}</span>` : ''}
+      <div class="bm-meta">
         ${tagNames}
         ${taskBadge}
-        ${b.visibility === 'shared' ? '<span class="shared-badge">sdílená</span>' : ''}
+        ${b.visibility === 'shared' ? '<span class="shared-badge desktop-only">sdílená</span>' : ''}
         <div class="avatar" style="background:${avatarColor}" title="${esc(author.name || '')}">${esc(initials)}</div>
-        <span class="bm-date">${fmtDate(b.updated || b.created)}</span>
+        <span class="bm-date desktop-only">${fmtDate(b.updated || b.created)}</span>
+        <button class="bm-edit-btn" onclick="event.stopPropagation();openModal('${esc(b.id)}')">Upravit</button>
       </div>
-      <div class="bm-open-btn" onclick="event.stopPropagation();window.open('${esc(b.url)}','_blank','noopener')" title="Otevřít odkaz">↗</div>
     </div>`;
   }).join('');
 }
@@ -991,7 +1275,6 @@ function renderList() {
 // MODAL
 // ============================================================
 function openModal(id) {
-  const isMobile = window.innerWidth <= 680;
   ui.editingId = id || null;
   ui.editingTasks = [];
   ui.editingVisibility = 'private';
@@ -1004,7 +1287,8 @@ function openModal(id) {
     if (!b) return;
     document.getElementById('modal-title').value = b.title || '';
     document.getElementById('modal-url').value = b.url || '';
-    document.getElementById('modal-note').value = b.note || '';
+    // Poznámka – HTML obsah do contenteditable
+    document.getElementById('modal-note').innerHTML = b.note || '';
     ui.editingVisibility = b.visibility || 'private';
     ui.editingFolderId = b.folder_id || null;
     try { ui.editingTagIds = JSON.parse(b.tag_ids || '[]'); } catch(e) {}
@@ -1016,7 +1300,7 @@ function openModal(id) {
   } else {
     document.getElementById('modal-title').value = '';
     document.getElementById('modal-url').value = '';
-    document.getElementById('modal-note').value = '';
+    document.getElementById('modal-note').innerHTML = '';
     document.getElementById('btn-archive').style.display = 'none';
     document.getElementById('btn-delete').style.display = 'none';
   }
@@ -1026,7 +1310,7 @@ function openModal(id) {
   renderTagSelected();
   renderTasksList();
   document.getElementById('modal-overlay').classList.add('open');
-  setTimeout(() => document.getElementById('modal-title').focus(), 100);
+  setTimeout(() => document.getElementById('modal-title').focus(), 80);
 }
 
 function closeModal() {
@@ -1050,12 +1334,15 @@ async function saveBookmark() {
   const url = document.getElementById('modal-url').value.trim();
   if (!title && !url) { showToast('Vyplňte název nebo URL.'); return; }
 
+  // Načíst HTML z contenteditable poznámky
+  const noteHtml = document.getElementById('modal-note').innerHTML;
+
   const now = Date.now();
   const row = {
     id: ui.editingId || generateId(),
     title: title || getDomain(url) || url,
     url: url,
-    note: document.getElementById('modal-note').value,
+    note: noteHtml,
     visibility: ui.editingVisibility,
     folder_id: ui.editingFolderId || null,
     tag_ids: JSON.stringify(ui.editingTagIds),
@@ -1081,8 +1368,7 @@ async function archiveBookmark() {
   const row = { ...b, archived: !b.archived, updated: Date.now() };
   try {
     await sbUpsertRow('zl_bookmarks', row);
-    closeModal();
-    await sbPull();
+    closeModal(); await sbPull();
     showToast(row.archived ? 'Záložka archivována' : 'Záložka obnovena');
   } catch(e) { showToast('Chyba: ' + e.message); }
 }
@@ -1092,10 +1378,15 @@ async function deleteBookmark() {
   if (!confirm('Opravdu smazat tuto záložku?')) return;
   try {
     await sbDelete('zl_bookmarks', ui.editingId);
-    closeModal();
-    await sbPull();
+    closeModal(); await sbPull();
     showToast('Záložka smazána');
   } catch(e) { showToast('Chyba: ' + e.message); }
+}
+
+// ── NOTE EDITOR ──────────────────────────────────────────────
+function execNote(cmd, value) {
+  document.getElementById('modal-note').focus();
+  document.execCommand(cmd, false, value || null);
 }
 
 // ============================================================
@@ -1103,12 +1394,19 @@ async function deleteBookmark() {
 // ============================================================
 function renderTasksList() {
   const el = document.getElementById('tasks-list');
-  if (!ui.editingTasks.length) { el.innerHTML = '<div style="font-size:13px;color:var(--text3);padding:4px 0">Žádné úkoly.</div>'; return; }
+  if (!ui.editingTasks.length) {
+    el.innerHTML = '<div style="font-size:13px;color:var(--text3);padding:4px 0">Žádné úkoly.</div>';
+    return;
+  }
   el.innerHTML = ui.editingTasks.map((t, i) => `
     <div class="task-item">
       <input type="checkbox" class="task-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${i})">
       <span class="task-text ${t.done ? 'done' : ''}">${esc(t.text)}</span>
-      <div class="task-del" onclick="removeTask(${i})">×</div>
+      <div class="task-move-btns">
+        <button class="task-move-btn" onclick="moveTask(${i},-1)" title="Nahoru" ${i===0 ? 'disabled style="opacity:.3"' : ''}>▲</button>
+        <button class="task-move-btn" onclick="moveTask(${i},1)" title="Dolů" ${i===ui.editingTasks.length-1 ? 'disabled style="opacity:.3"' : ''}>▼</button>
+      </div>
+      <div class="task-del" onclick="removeTask(${i})" title="Smazat">×</div>
     </div>
   `).join('');
 }
@@ -1118,39 +1416,38 @@ function addTask() {
   const text = inp.value.trim();
   if (!text) return;
   ui.editingTasks.push({ text, done: false, id: generateId() });
-  inp.value = '';
-  renderTasksList();
+  inp.value = ''; renderTasksList();
+  inp.focus();
 }
 
 function taskKeydown(e) { if (e.key === 'Enter') { e.preventDefault(); addTask(); } }
 
-function toggleTask(i) {
-  ui.editingTasks[i].done = !ui.editingTasks[i].done;
+function toggleTask(i) { ui.editingTasks[i].done = !ui.editingTasks[i].done; renderTasksList(); }
+
+function moveTask(i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= ui.editingTasks.length) return;
+  [ui.editingTasks[i], ui.editingTasks[j]] = [ui.editingTasks[j], ui.editingTasks[i]];
   renderTasksList();
 }
 
-function removeTask(i) {
-  ui.editingTasks.splice(i, 1);
-  renderTasksList();
-}
+function removeTask(i) { ui.editingTasks.splice(i, 1); renderTasksList(); }
 
 // ============================================================
-// DROPDOWNS (folder/tag)
+// DROPDOWNS
 // ============================================================
 function toggleDropdown(type) {
-  const menuId = type + '-dropdown-menu';
-  const menu = document.getElementById(menuId);
+  const menu = document.getElementById(type + '-dropdown-menu');
   const isOpen = menu.style.display !== 'none';
   closeAllDropdowns();
   if (!isOpen) {
-    menu.style.display = 'block';
-    ui.activeDropdown = type;
+    menu.style.display = 'block'; ui.activeDropdown = type;
     type === 'folder' ? renderFolderDropdown() : renderTagDropdown();
   }
 }
 
 function closeAllDropdowns() {
-  ['folder', 'tag'].forEach(t => {
+  ['folder','tag'].forEach(t => {
     const m = document.getElementById(t + '-dropdown-menu');
     if (m) m.style.display = 'none';
   });
@@ -1161,9 +1458,9 @@ function renderFolderDropdown() {
   const q = (document.getElementById('folder-search')?.value || '').toLowerCase();
   const items = state.folders.filter(f => !q || f.name.toLowerCase().includes(q));
   const el = document.getElementById('folder-dropdown-items');
-  const noneClass = !ui.editingFolderId ? 'selected' : '';
-  el.innerHTML = `<div class="dropdown-item ${noneClass}" onclick="selectFolder(null)"><span class="check">${!ui.editingFolderId ? '✓' : ''}</span>Bez složky</div>` +
-    renderFolderItems(items, null, q);
+  el.innerHTML = `<div class="dropdown-item ${!ui.editingFolderId ? 'selected' : ''}" onclick="selectFolder(null)">
+    <span class="check">${!ui.editingFolderId ? '✓' : ''}</span>Bez složky
+  </div>` + renderFolderItems(items, null, q);
 }
 
 function renderFolderItems(items, parentId, q) {
@@ -1177,9 +1474,7 @@ function renderFolderItems(items, parentId, q) {
 }
 
 function selectFolder(id) {
-  ui.editingFolderId = id;
-  renderFolderSelected();
-  renderFolderDropdown();
+  ui.editingFolderId = id; renderFolderSelected(); renderFolderDropdown();
   if (!id) closeAllDropdowns();
 }
 
@@ -1193,8 +1488,7 @@ function renderFolderSelected() {
 function renderTagDropdown() {
   const q = (document.getElementById('tag-search')?.value || '').toLowerCase();
   const items = state.tags.filter(t => !q || t.name.toLowerCase().includes(q));
-  const el = document.getElementById('tag-dropdown-items');
-  el.innerHTML = renderTagItems(items, null, q);
+  document.getElementById('tag-dropdown-items').innerHTML = renderTagItems(items, null, q);
 }
 
 function renderTagItems(items, parentId, q) {
@@ -1210,8 +1504,7 @@ function renderTagItems(items, parentId, q) {
 function toggleTagSel(id) {
   if (ui.editingTagIds.includes(id)) ui.editingTagIds = ui.editingTagIds.filter(x => x !== id);
   else ui.editingTagIds.push(id);
-  renderTagSelected();
-  renderTagDropdown();
+  renderTagSelected(); renderTagDropdown();
 }
 
 function renderTagSelected() {
@@ -1229,7 +1522,7 @@ function getDepth(items, id, depth = 0) {
   return getDepth(items, item.parent_id, depth + 1);
 }
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
   if (ui.activeDropdown && !e.target.closest('.dropdown-wrap')) closeAllDropdowns();
 });
 
@@ -1238,14 +1531,14 @@ document.addEventListener('click', (e) => {
 // ============================================================
 async function addFolder(parentId) {
   const name = prompt('Název složky:');
-  if (!name || !name.trim()) return;
+  if (!name?.trim()) return;
   const row = { id: generateId(), name: name.trim(), parent_id: parentId || null, created_at: new Date().toISOString() };
   try { await sbUpsertRow('zl_folders', row); await sbPull(); } catch(e) { showToast('Chyba: ' + e.message); }
 }
 
 async function addSubItem(type, parentId) {
   const name = prompt(`Název ${type === 'folder' ? 'složky' : 'štítku'}:`);
-  if (!name || !name.trim()) return;
+  if (!name?.trim()) return;
   const row = { id: generateId(), name: name.trim(), parent_id: parentId, created_at: new Date().toISOString() };
   const table = type === 'folder' ? 'zl_folders' : 'zl_tags';
   try { await sbUpsertRow(table, row); await sbPull(); } catch(e) { showToast('Chyba: ' + e.message); }
@@ -1253,17 +1546,17 @@ async function addSubItem(type, parentId) {
 
 async function addTag(parentId) {
   const name = prompt('Název štítku:');
-  if (!name || !name.trim()) return;
+  if (!name?.trim()) return;
   const row = { id: generateId(), name: name.trim(), parent_id: parentId || null, created_at: new Date().toISOString() };
   try { await sbUpsertRow('zl_tags', row); await sbPull(); } catch(e) { showToast('Chyba: ' + e.message); }
 }
 
 async function renameTreeItem(type, id, currentName) {
-  const name = prompt(`Přejmenovat na:`, currentName);
-  if (!name || !name.trim()) return;
+  const name = prompt('Přejmenovat na:', currentName);
+  if (!name?.trim()) return;
   const table = type === 'folder' ? 'zl_folders' : 'zl_tags';
   try {
-    await fetch(sb.url + `/rest/v1/${table}?id=eq.${id}`, {
+    await fetch(sb.url + `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
       method: 'PATCH', headers: sbHeaders(), body: JSON.stringify({ name: name.trim() })
     });
     await sbPull();
@@ -1280,7 +1573,7 @@ async function deleteTreeItem(type, id) {
 // ROW CLICK
 // ============================================================
 function rowClick(id) {
-  if (window.innerWidth <= 680) openReadView(id);
+  if (window.innerWidth <= 720) openReadView(id);
   else openModal(id);
 }
 
@@ -1295,26 +1588,20 @@ function openReadView(id) {
   const urlEl = document.getElementById('read-url');
   urlEl.href = b.url || '#';
   document.getElementById('read-url-text').textContent = b.url || '';
-  document.getElementById('read-note').textContent = b.note || '';
+  // Poznámka – HTML (bezpečné, uložili jsme sami)
+  document.getElementById('read-note').innerHTML = b.note || '';
   const tasks = (() => { try { return JSON.parse(b.tasks || '[]'); } catch(e) { return []; } })();
-  document.getElementById('read-tasks').innerHTML = tasks.length ? '<div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Úkoly</div>' + tasks.map(t =>
-    `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px;color:var(--text);${t.done ? 'text-decoration:line-through;color:var(--text3)' : ''}">
-      ${t.done ? '☑' : '☐'} ${esc(t.text)}
-    </div>`
-  ).join('') : '';
+  document.getElementById('read-tasks').innerHTML = tasks.length
+    ? '<div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Úkoly</div>'
+      + tasks.map(t => `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px;color:var(--text);${t.done ? 'text-decoration:line-through;color:var(--text3)' : ''}">
+        ${t.done ? '☑' : '☐'} ${esc(t.text)}
+      </div>`).join('')
+    : '';
   document.getElementById('read-overlay').classList.add('open');
 }
 
-function closeReadView() {
-  document.getElementById('read-overlay').classList.remove('open');
-  ui.readId = null;
-}
-
-function editFromRead() {
-  const id = ui.readId;
-  closeReadView();
-  openModal(id);
-}
+function closeReadView() { document.getElementById('read-overlay').classList.remove('open'); ui.readId = null; }
+function editFromRead() { const id = ui.readId; closeReadView(); openModal(id); }
 
 // ============================================================
 // USER PANEL
@@ -1324,13 +1611,9 @@ function renderUserPanel() {
   el.style.background = currentUser.color;
   el.textContent = getInitials(currentUser.name);
   document.getElementById('sidebar-username').textContent = currentUser.name;
-
   document.getElementById('up-name').value = currentUser.name;
   document.getElementById('up-email').value = currentUser.email;
-
-  // Swatches
-  const swatchEl = document.getElementById('color-swatches');
-  swatchEl.innerHTML = AVATAR_COLORS.map(c =>
+  document.getElementById('color-swatches').innerHTML = AVATAR_COLORS.map(c =>
     `<div class="color-swatch ${c === currentUser.color ? 'selected' : ''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
   ).join('');
 }
@@ -1341,16 +1624,12 @@ function toggleUserPanel() {
 }
 
 let nameDebounceTimer;
-function debounceSaveName() {
-  clearTimeout(nameDebounceTimer);
-  nameDebounceTimer = setTimeout(saveProfileName, 800);
-}
+function debounceSaveName() { clearTimeout(nameDebounceTimer); nameDebounceTimer = setTimeout(saveProfileName, 800); }
 
 async function saveProfileName() {
   const name = document.getElementById('up-name').value.trim();
   if (!name) return;
-  currentUser.name = name;
-  renderUserPanel();
+  currentUser.name = name; renderUserPanel();
   try {
     await fetch(sb.url + '/auth/v1/user', { method: 'PUT', headers: sbHeaders(), body: JSON.stringify({ data: { display_name: name } }) });
     await sbUpsertRow('zl_profiles', { id: currentUser.id, display_name: name, email: currentUser.email, avatar_color: currentUser.color });
@@ -1371,81 +1650,90 @@ function toggleTheme() {
 }
 
 // ============================================================
-// EXPORT / IMPORT
+// SIDEBAR TOGGLE (desktop collapse + mobile overlay)
 // ============================================================
-function doExportJSON() {
-  const data = JSON.stringify({ folders: state.folders, tags: state.tags, bookmarks: state.bookmarks }, null, 2);
-  const blob = new Blob([data], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = `zalozky-export-${new Date().toISOString().slice(0,10)}.json`; a.click();
-  URL.revokeObjectURL(url);
+function collapseSidebar(silent) {
+  ui.sidebarCollapsed = true;
+  document.getElementById('sidebar').classList.add('collapsed');
+  if (!silent) localStorage.setItem('zl_sidebar_collapsed', '1');
 }
 
-async function doImport(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  try {
-    const text = await file.text();
-    const data = JSON.parse(text);
-    let count = 0;
-    const batchUpsert = async (table, rows) => {
-      for (let i = 0; i < rows.length; i += 50) {
-        const batch = rows.slice(i, i + 50);
-        await fetch(sb.url + `/rest/v1/${table}`, {
-          method: 'POST', headers: { ...sbHeaders(), 'Prefer': 'resolution=merge-duplicates' },
-          body: JSON.stringify(batch)
-        });
-        count += batch.length;
-      }
-    };
-    if (data.folders) await batchUpsert('zl_folders', data.folders);
-    if (data.tags) await batchUpsert('zl_tags', data.tags);
-    if (data.bookmarks) await batchUpsert('zl_bookmarks', data.bookmarks);
-    await sbPull();
-    showToast(`Import hotov: ${count} záznamů`);
-  } catch(e) { showToast('Chyba importu: ' + e.message); }
-  event.target.value = '';
+function expandSidebar(silent) {
+  ui.sidebarCollapsed = false;
+  document.getElementById('sidebar').classList.remove('collapsed');
+  if (!silent) localStorage.setItem('zl_sidebar_collapsed', '0');
 }
 
-// ============================================================
-// URL HELPERS
-// ============================================================
-function openUrl() {
-  const url = document.getElementById('modal-url').value.trim();
-  if (url) window.open(url, '_blank', 'noopener');
+function toggleSidebar() {
+  if (window.innerWidth <= 720) {
+    // Mobile: overlay mód
+    const sidebar = document.getElementById('sidebar');
+    const isOpen = sidebar.classList.contains('open');
+    if (isOpen) closeSidebar(); else openSidebar();
+  } else {
+    // Desktop: collapse/expand
+    if (ui.sidebarCollapsed) expandSidebar(); else collapseSidebar();
+  }
 }
 
-let titleFetchTimer;
-function autoFetchTitle() {
-  clearTimeout(titleFetchTimer);
-  titleFetchTimer = setTimeout(() => {
-    const title = document.getElementById('modal-title').value.trim();
-    if (title) return; // don't overwrite manual title
-    const url = document.getElementById('modal-url').value.trim();
-    if (url) {
-      const domain = getDomain(url);
-      if (domain) document.getElementById('modal-title').placeholder = domain;
-    }
-  }, 500);
-}
-
-// ============================================================
-// SIDEBAR MOBILE
-// ============================================================
 function openSidebar() {
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('sidebar-overlay').classList.add('open');
 }
+
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebar-overlay').classList.remove('open');
 }
 
 // ============================================================
+// EXPORT CSV
+// ============================================================
+function doExportCSV() {
+  const BOM = '\uFEFF'; // pro Excel UTF-8
+  const header = 'Název záložky;URL;Poznámka;Datum;Uživatel;Složka';
+  const rows = state.bookmarks.filter(b => !b.archived).map(b => {
+    const noteText = (b.note || '').replace(/<[^>]+>/g, '').replace(/\n/g,' ').replace(/;/g,',');
+    const title = (b.title || '').replace(/;/g,',').replace(/"/g,'""');
+    const url = (b.url || '').replace(/;/g,'');
+    const date = fmtDate(b.updated || b.created);
+    const userName = (allUsers[b.created_by]?.name || currentUser.name || '').replace(/;/g,',');
+    const folder = (() => {
+      if (!b.folder_id) return '';
+      // Najdi hlavní složku (root)
+      let f = state.folders.find(x => x.id === b.folder_id);
+      while (f && f.parent_id) f = state.folders.find(x => x.id === f.parent_id);
+      return f ? f.name.replace(/;/g,',') : '';
+    })();
+    return `"${title}";"${url}";"${noteText}";"${date}";"${userName}";"${folder}"`;
+  });
+  const csv = BOM + header + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url2 = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url2;
+  a.download = `zalozky-${new Date().toISOString().slice(0,10)}.csv`; a.click();
+  URL.revokeObjectURL(url2);
+  showToast(`Exportováno ${rows.length} záložek`);
+}
+
+// ============================================================
+// URL helper
+// ============================================================
+let titleFetchTimer;
+function autoFetchTitle() {
+  clearTimeout(titleFetchTimer);
+  titleFetchTimer = setTimeout(() => {
+    const title = document.getElementById('modal-title').value.trim();
+    if (title) return;
+    const url = document.getElementById('modal-url').value.trim();
+    if (url) { const d = getDomain(url); if (d) document.getElementById('modal-title').placeholder = d; }
+  }, 500);
+}
+
+// ============================================================
 // PULL TO REFRESH
 // ============================================================
 let pullStartY = 0;
-const listArea = document.getElementById ? null : null;
 document.addEventListener('touchstart', e => { pullStartY = e.touches[0].clientY; });
 document.addEventListener('touchend', e => {
   const el = document.getElementById('list-area');
@@ -1457,15 +1745,16 @@ document.addEventListener('touchend', e => {
 // ============================================================
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModal(); closeReadView(); closeAllDropdowns(); }
-  if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); if (document.getElementById('modal-overlay').classList.contains('open')) saveBookmark(); }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    if (document.getElementById('modal-overlay').classList.contains('open')) saveBookmark();
+  }
 });
 
 // ============================================================
 // UTILS
 // ============================================================
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-}
+function generateId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
 function getInitials(name) {
   if (!name) return '?';
@@ -1483,8 +1772,7 @@ function strColor(str) {
 let toastTimer;
 function showToast(msg) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
+  el.textContent = msg; el.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
@@ -1494,10 +1782,15 @@ function showToast(msg) {
 // ============================================================
 async function boot() {
   loadSbConfig();
+
   if (sb.url) {
     document.getElementById('sb-url').value = sb.url;
     document.getElementById('sb-key').value = sb.key ? '••••••••' : '';
-    document.getElementById('auth-config-section').style.display = 'none';
+    // Ukaž status jako ok hned (ověřeno při předchozím spuštění)
+    const dot = document.getElementById('sb-dot');
+    const txt = document.getElementById('sb-status-text');
+    dot.className = 'sb-dot ok'; txt.className = 'sb-status-text ok';
+    txt.textContent = 'Uloženo ✓';
   }
 
   if (sb.url && sb.key) {
