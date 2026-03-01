@@ -234,9 +234,9 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 
 /* ── TOPBAR ───────────────────────────────────────────────── */
 .topbar {
-  display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  display: flex; align-items: center; gap: 10px; padding: 13px 16px 11px;
   border-bottom: 1px solid var(--border); flex-shrink: 0;
-  background: var(--bg2); /* stejná barva jako sidebar */
+  background: var(--bg2);
 }
 .sidebar-toggle-btn {
   width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
@@ -295,11 +295,21 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .bm-favicon img { width: 16px; height: 16px; object-fit: contain; }
 .bm-favicon-fallback { font-size: 13px; color: var(--text3); }
-.bm-content { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.bm-title { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; max-width: 300px; }
-.bm-url { font-size: 12px; color: var(--blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.bm-url:hover { text-decoration: underline; }
-.bm-note-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+/* Hlavní obsah záložky – dvouřádkový layout */
+.bm-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.bm-row1 { display: flex; align-items: baseline; gap: 8px; min-width: 0; flex-wrap: nowrap; }
+.bm-title {
+  font-size: 14px; font-weight: 500; color: var(--text);
+  text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  flex-shrink: 1; min-width: 0;
+}
+.bm-title:hover { color: var(--blue); text-decoration: underline; }
+.bm-domain {
+  font-size: 12px; color: var(--blue); text-decoration: none;
+  white-space: nowrap; flex-shrink: 0;
+}
+.bm-domain:hover { text-decoration: underline; }
+.bm-note-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bm-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .tag-chip { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; }
 .shared-badge { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(37,99,235,.2); white-space: nowrap; }
@@ -314,6 +324,14 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   white-space: nowrap;
 }
 .bm-edit-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+/* Tlačítko Kopírovat URL */
+.bm-copy-btn {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg);
+  color: var(--text3); cursor: pointer; transition: all .15s; flex-shrink: 0; font-size: 14px;
+}
+.bm-copy-btn:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
+.bm-copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: var(--green); }
 .desktop-only { display: flex; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
 .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
@@ -535,6 +553,91 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .read-tasks { margin-top: 8px; }
 
 /* ── RESPONSIVE ───────────────────────────────────────────── */
+/* ── NÁPOVĚDA ─────────────────────────────────────────────── */
+.help-overlay {
+  position: fixed; inset: 0; background: var(--bg); z-index: 200;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.help-overlay.open { display: flex; }
+.help-header {
+  display: flex; align-items: center; gap: 12px; padding: 13px 20px 11px;
+  border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--bg2);
+}
+.help-title { flex: 1; font-size: 16px; font-weight: 600; color: var(--text); }
+.help-edit-btn {
+  padding: 6px 14px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 13px; cursor: pointer; color: var(--text2); background: var(--bg);
+  font-family: 'Geist', sans-serif; transition: all .12s;
+}
+.help-edit-btn:hover { background: var(--bg3); }
+.help-edit-btn.editing { background: var(--blue); color: #fff; border-color: var(--blue); }
+.help-close {
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  border-radius: 7px; cursor: pointer; color: var(--text3); font-size: 20px; transition: all .12s;
+}
+.help-close:hover { background: var(--bg3); color: var(--text); }
+/* Toolbar (edit mode) */
+.help-toolbar {
+  display: none; align-items: center; gap: 3px; padding: 7px 24px;
+  border-bottom: 1px solid var(--border); background: var(--bg2); flex-wrap: wrap; flex-shrink: 0;
+}
+.help-toolbar.show { display: flex; }
+.help-tb-btn {
+  min-width: 30px; height: 30px; padding: 0 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 5px; cursor: pointer; border: none; background: transparent;
+  font-family: 'Geist', sans-serif; font-size: 13px; color: var(--text2); transition: all .12s;
+}
+.help-tb-btn:hover { background: var(--bg3); color: var(--text); }
+.help-tb-sep { width: 1px; height: 20px; background: var(--border); margin: 0 3px; }
+.help-body-wrap { flex: 1; overflow-y: auto; }
+.help-body-wrap::-webkit-scrollbar { width: 5px; }
+.help-body-wrap::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+/* View + edit content */
+.help-view, .help-editor {
+  max-width: 780px; width: 100%; margin: 0 auto; padding: 28px 32px;
+  font-size: 14.5px; line-height: 1.75; color: var(--text); font-family: 'Geist', sans-serif;
+}
+.help-editor { outline: none; min-height: 300px; }
+.help-editor:empty::before { content: 'Napište obsah nápovědy...'; color: var(--text3); }
+.help-view h1, .help-editor h1 { font-size: 22px; font-weight: 700; margin: 0 0 16px; }
+.help-view h2, .help-editor h2 { font-size: 17px; font-weight: 700; margin: 22px 0 8px; }
+.help-view h3, .help-editor h3 { font-size: 15px; font-weight: 600; margin: 16px 0 6px; }
+.help-view p, .help-editor p { margin-bottom: 10px; }
+.help-view ul, .help-editor ul,
+.help-view ol, .help-editor ol { padding-left: 22px; margin-bottom: 10px; }
+.help-view li, .help-editor li { margin-bottom: 3px; }
+.help-view b, .help-editor b,
+.help-view strong, .help-editor strong { font-weight: 700; }
+.help-view i, .help-editor i,
+.help-view em, .help-editor em { font-style: italic; }
+.help-view u, .help-editor u { text-decoration: underline; }
+.help-footer {
+  display: none; padding: 12px 32px; border-top: 1px solid var(--border);
+  background: var(--bg2); gap: 8px; justify-content: flex-end; flex-shrink: 0;
+}
+.help-footer.show { display: flex; }
+
+/* ── HESLO DIALOG ─────────────────────────────────────────── */
+.pwd-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 300;
+  display: none; align-items: center; justify-content: center;
+}
+.pwd-overlay.open { display: flex; }
+.pwd-box {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px 28px 22px; width: 340px; box-shadow: var(--shadow-lg);
+}
+.pwd-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 14px; }
+.pwd-input {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 7px;
+  font-size: 14px; font-family: 'Geist', sans-serif; background: var(--bg);
+  color: var(--text); outline: none; margin-bottom: 8px;
+}
+.pwd-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
+.pwd-error { font-size: 13px; color: var(--red); margin-bottom: 10px; min-height: 18px; }
+.pwd-btns { display: flex; gap: 8px; justify-content: flex-end; }
+
 @media (max-width: 720px) {
   .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-110%); }
   .sidebar.open { transform: translateX(0) !important; box-shadow: var(--shadow-lg); }
@@ -549,9 +652,9 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .modal { max-height: 100dvh; border-radius: 0; max-width: 100%; margin: 0; }
   .modal-overlay { padding: 0; align-items: flex-end; }
   .modal-overlay.open .modal { border-radius: 16px 16px 0 0; max-height: 95dvh; }
-}
-@media (min-width: 721px) {
-  /* Desktop: sidebar-toggle btn vždy viditelný v topbaru */
+  .help-view, .help-editor { padding: 20px 16px; }
+  .help-toolbar { padding: 7px 16px; }
+  .help-footer { padding: 12px 16px; }
 }
 </style>
 </head>
@@ -678,12 +781,15 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
         <button class="logout-btn" onclick="doLogout()">Odhlásit se</button>
       </div>
 
-      <!-- SIDEBAR BOTTOM: user chip → archiv → export CSV -->
+      <!-- SIDEBAR BOTTOM: user chip → nápověda → archiv → export CSV -->
       <div class="sidebar-bottom">
         <div class="user-chip" onclick="toggleUserPanel()">
           <div class="avatar" id="sidebar-avatar"></div>
           <span class="user-name" id="sidebar-username">...</span>
           <span class="chevron">▾</span>
+        </div>
+        <div class="sidebar-bottom-item" onclick="openHelp()">
+          <div class="sbi-left">❓ Nápověda</div>
         </div>
         <div class="sidebar-bottom-item" onclick="setView('archive')">
           <div class="sbi-left">📦 Archiv</div>
@@ -739,6 +845,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
       <div class="modal-close" onclick="closeModal()">×</div>
     </div>
     <div class="modal-body">
+      <!-- Anchor pro owner notice -->
+      <div id="modal-body-top" style="display:none"></div>
       <!-- URL – textarea, zalamuje se -->
       <div class="field">
         <label>URL adresa</label>
@@ -810,8 +918,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
         <button class="btn danger" id="btn-delete" onclick="deleteBookmark()">Smazat</button>
       </div>
       <div class="modal-footer-right">
-        <button class="btn" onclick="closeModal()">Zrušit</button>
-        <button class="btn primary" onclick="saveBookmark()">Uložit</button>
+        <button class="btn" id="btn-cancel" onclick="closeModal()">Zrušit</button>
+        <button class="btn primary" id="btn-save" onclick="saveBookmark()">Uložit</button>
       </div>
     </div>
   </div>
@@ -828,6 +936,50 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
     <a href="#" class="read-url-link" id="read-url" target="_blank" rel="noopener">↗ <span id="read-url-text"></span></a>
     <div class="read-note" id="read-note"></div>
     <div class="read-tasks" id="read-tasks"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NÁPOVĚDA OVERLAY
+═══════════════════════════════════════════════════════════ -->
+<div class="help-overlay" id="help-overlay">
+  <div class="help-header">
+    <div class="help-title">❓ Nápověda</div>
+    <button class="help-edit-btn" id="help-edit-btn" onclick="toggleHelpEdit()">✏ Upravit</button>
+    <div class="help-close" onclick="closeHelp()">×</div>
+  </div>
+  <div class="help-toolbar" id="help-toolbar">
+    <button class="help-tb-btn" title="Tučné" onmousedown="event.preventDefault();execHelp('bold')"><b>B</b></button>
+    <button class="help-tb-btn" title="Kurzíva" onmousedown="event.preventDefault();execHelp('italic')"><i>I</i></button>
+    <button class="help-tb-btn" title="Podtržení" onmousedown="event.preventDefault();execHelp('underline')"><u>U</u></button>
+    <div class="help-tb-sep"></div>
+    <button class="help-tb-btn" title="Odrážkový seznam" onmousedown="event.preventDefault();execHelp('insertUnorderedList')">• —</button>
+    <button class="help-tb-btn" title="Číslovaný seznam" onmousedown="event.preventDefault();execHelp('insertOrderedList')">1.</button>
+    <div class="help-tb-sep"></div>
+    <button class="help-tb-btn" title="Nadpis" onmousedown="event.preventDefault();execHelp('formatBlock','h2')"><b>H2</b></button>
+    <button class="help-tb-btn" title="Normální odstavec" onmousedown="event.preventDefault();execHelp('formatBlock','p')">¶</button>
+  </div>
+  <div class="help-body-wrap">
+    <div class="help-view" id="help-view"></div>
+    <div class="help-editor" id="help-editor" contenteditable="false" style="display:none"></div>
+  </div>
+  <div class="help-footer" id="help-footer">
+    <button class="btn" onclick="cancelHelpEdit()">Zrušit</button>
+    <button class="btn primary" onclick="saveHelpContent()">Uložit nápovědu</button>
+  </div>
+</div>
+
+<!-- HESLO DIALOG -->
+<div class="pwd-overlay" id="pwd-overlay">
+  <div class="pwd-box">
+    <div class="pwd-title">🔐 Zadejte heslo pro editaci nápovědy</div>
+    <input type="password" class="pwd-input" id="pwd-input" placeholder="Heslo..."
+           onkeydown="if(event.key==='Enter') checkHelpPassword()">
+    <div class="pwd-error" id="pwd-error"></div>
+    <div class="pwd-btns">
+      <button class="btn" onclick="closePwdDialog()">Zrušit</button>
+      <button class="btn primary" onclick="checkHelpPassword()">Potvrdit</button>
+    </div>
   </div>
 </div>
 
@@ -943,6 +1095,10 @@ async function sbUpsertRow(table, row) {
 }
 
 async function sbDelete(table, id) {
+  // Pro záložky přidej ochranu created_by – nelze smazat cizí záznam
+  if (table === 'zl_bookmarks') {
+    return sbRequest('DELETE', `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}&created_by=eq.${encodeURIComponent(currentUser.id)}`, null);
+  }
   return sbRequest('DELETE', `/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, null);
 }
 
@@ -1063,6 +1219,10 @@ async function sbPull() {
       sbRequest('GET', '/rest/v1/zl_bookmarks?select=*&order=created.desc', null),
       sbRequest('GET', '/rest/v1/zl_profiles?select=*', null),
     ]);
+
+    // Pokud je právě otevřený modal pro editaci, nektualizuj jen pozadí – neinterrupt
+    const modalOpen = document.getElementById('modal-overlay').classList.contains('open');
+
     state.folders = folders || [];
     state.tags = tags || [];
     state.bookmarks = bookmarks || [];
@@ -1073,8 +1233,14 @@ async function sbPull() {
       localStorage.setItem('zl_avatar_color_' + currentUser.id, currentUser.color);
     }
     localStorage.setItem('zl_state', JSON.stringify(state));
-    setStatus(true, 'Supabase: připojeno');
-    renderAll();
+    setStatus(true, 'Synchronizováno', true);
+
+    if (modalOpen) {
+      // Pouze překreslí seznam na pozadí, modal nechá otevřený
+      renderSidebarCounts(); renderFoldersTree(); renderTagsTree(); renderUserPanel();
+    } else {
+      renderAll();
+    }
   } catch(e) {
     setStatus(false, 'Chyba připojení');
     try {
@@ -1084,10 +1250,11 @@ async function sbPull() {
   }
 }
 
-function setStatus(ok, text) {
+function setStatus(ok, text, showTime) {
   const dot = document.getElementById('status-dot');
   dot.className = 'status-dot' + (ok === true ? ' ok' : '');
-  document.getElementById('status-text').textContent = text;
+  const timeStr = showTime ? ` · ${new Date().getHours().toString().padStart(2,'0')}:${new Date().getMinutes().toString().padStart(2,'0')}:${new Date().getSeconds().toString().padStart(2,'0')}` : '';
+  document.getElementById('status-text').textContent = text + timeStr;
 }
 
 // ============================================================
@@ -1230,8 +1397,10 @@ function renderList() {
     return;
   }
   el.innerHTML = list.map(b => {
-    const domain = getDomain(b.url || '');
-    const faviconUrl = getFaviconUrl(b.url || '');
+    const url = (b.url || '').trim();
+    const domain = getDomain(url);
+    const domainRoot = url ? (() => { try { const u = new URL(url); return u.origin; } catch(e) { return url; } })() : '';
+    const faviconUrl = getFaviconUrl(url);
     const tags = (() => { try { return JSON.parse(b.tag_ids || '[]'); } catch(e) { return []; } })();
     const tagNames = tags.slice(0,2).map(tid => {
       const t = state.tags.find(x => x.id === tid);
@@ -1244,9 +1413,12 @@ function renderList() {
       : '';
     const author = allUsers[b.created_by] || {};
     const avatarColor = author.color || strColor(b.created_by || '');
-    const initials = getInitials(author.name || '?');
-    // Náhled poznámky – strip HTML tagů
-    const noteText = (b.note || '').replace(/<[^>]+>/g, '').replace(/\n/g,' ').substring(0, 90);
+    // Iniciály: skutečné iniciály z jména, ne otazník
+    const authorName = author.name || currentUser.name || '';
+    const initials = getInitials(authorName);
+    // Náhled poznámky – první věta nebo max 80 znaků
+    const noteRaw = (b.note || '').replace(/<[^>]+>/g, '').replace(/\s+/g,' ').trim();
+    const notePreview = noteRaw.length > 80 ? noteRaw.substring(0, 80) + '…' : noteRaw;
 
     return `<div class="bookmark-row" onclick="rowClick('${esc(b.id)}')">
       <div class="bm-favicon">
@@ -1255,20 +1427,37 @@ function renderList() {
           : '<span class="bm-favicon-fallback">🔖</span>'}
       </div>
       <div class="bm-content">
-        <span class="bm-title">${esc(b.title || b.url || 'Bez názvu')}</span>
-        <span class="bm-url desktop-only">${esc(domain)}</span>
-        ${noteText ? `<span class="bm-note-preview desktop-only">${esc(noteText)}</span>` : ''}
+        <div class="bm-row1">
+          ${url
+            ? `<a class="bm-title" href="${esc(url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="${esc(url)}">${esc(b.title || domain || 'Bez názvu')}</a>`
+            : `<span class="bm-title">${esc(b.title || 'Bez názvu')}</span>`}
+          ${domain
+            ? `<a class="bm-domain desktop-only" href="${esc(domainRoot)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(domain)}</a>`
+            : ''}
+        </div>
+        ${notePreview ? `<div class="bm-note-preview">${esc(notePreview)}</div>` : ''}
       </div>
       <div class="bm-meta">
         ${tagNames}
         ${taskBadge}
         ${b.visibility === 'shared' ? '<span class="shared-badge desktop-only">sdílená</span>' : ''}
-        <div class="avatar" style="background:${avatarColor}" title="${esc(author.name || '')}">${esc(initials)}</div>
         <span class="bm-date desktop-only">${fmtDate(b.updated || b.created)}</span>
+        <div class="avatar" style="background:${avatarColor}" title="${esc(authorName)}">${esc(initials)}</div>
+        ${url ? `<button class="bm-copy-btn" id="copy-${esc(b.id)}" onclick="event.stopPropagation();copyUrl('${esc(b.id)}','${esc(url)}')" title="Kopírovat URL">⎘</button>` : ''}
         <button class="bm-edit-btn" onclick="event.stopPropagation();openModal('${esc(b.id)}')">Upravit</button>
       </div>
     </div>`;
   }).join('');
+}
+
+function copyUrl(id, url) {
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-' + id);
+    if (!btn) return;
+    btn.classList.add('copied');
+    btn.textContent = '✓';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘'; }, 2000);
+  }).catch(() => showToast('Kopírování selhalo'));
 }
 
 // ============================================================
@@ -1282,27 +1471,51 @@ function openModal(id) {
   ui.editingTagIds = [];
   ui.editingArchived = false;
 
+  // Čistit owner-notice
+  const ownerNotice = document.getElementById('modal-owner-notice');
+  if (ownerNotice) ownerNotice.remove();
+
   if (id) {
     const b = state.bookmarks.find(x => x.id === id);
     if (!b) return;
     document.getElementById('modal-title').value = b.title || '';
     document.getElementById('modal-url').value = b.url || '';
-    // Poznámka – HTML obsah do contenteditable
     document.getElementById('modal-note').innerHTML = b.note || '';
     ui.editingVisibility = b.visibility || 'private';
     ui.editingFolderId = b.folder_id || null;
     try { ui.editingTagIds = JSON.parse(b.tag_ids || '[]'); } catch(e) {}
     try { ui.editingTasks = JSON.parse(b.tasks || '[]'); } catch(e) {}
     ui.editingArchived = b.archived || false;
-    document.getElementById('btn-archive').style.display = '';
-    document.getElementById('btn-delete').style.display = '';
+
+    const isOwner = b.created_by === currentUser.id;
+
+    // Archivovat a Smazat – jen vlastník
+    document.getElementById('btn-archive').style.display = isOwner ? '' : 'none';
+    document.getElementById('btn-delete').style.display = isOwner ? '' : 'none';
     document.getElementById('btn-archive').textContent = b.archived ? 'Obnovit' : 'Archivovat';
+
+    // Uložit – jen vlastník může uložit; ostatní vidí záložku ale nemůžou přepisovat
+    document.getElementById('btn-save').style.display = isOwner ? '' : 'none';
+    document.getElementById('btn-cancel').textContent = isOwner ? 'Zrušit' : 'Zavřít';
+
+    // Oznámení o vlastnictví pokud není moje
+    if (!isOwner) {
+      const author = allUsers[b.created_by] || {};
+      const authorName = author.name || 'jiný uživatel';
+      const notice = document.createElement('div');
+      notice.id = 'modal-owner-notice';
+      notice.style.cssText = 'font-size:12px;color:var(--text3);background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin-bottom:14px;';
+      notice.innerHTML = `👁 Záložka patří uživateli <b>${authorName}</b>. Zobrazujete jen pro čtení.`;
+      document.getElementById('modal-body-top').after(notice);
+    }
   } else {
     document.getElementById('modal-title').value = '';
     document.getElementById('modal-url').value = '';
     document.getElementById('modal-note').innerHTML = '';
     document.getElementById('btn-archive').style.display = 'none';
     document.getElementById('btn-delete').style.display = 'none';
+    document.getElementById('btn-save').style.display = '';
+    document.getElementById('btn-cancel').textContent = 'Zrušit';
   }
 
   setVisibility(ui.editingVisibility);
@@ -1334,10 +1547,14 @@ async function saveBookmark() {
   const url = document.getElementById('modal-url').value.trim();
   if (!title && !url) { showToast('Vyplňte název nebo URL.'); return; }
 
-  // Načíst HTML z contenteditable poznámky
   const noteHtml = document.getElementById('modal-note').innerHTML;
-
   const now = Date.now();
+
+  // Zachovat původního autora – nepřepisovat created_by při editaci cizí záložky
+  const existing = ui.editingId ? state.bookmarks.find(b => b.id === ui.editingId) : null;
+  const originalCreatedBy = existing ? existing.created_by : currentUser.id;
+  const originalCreated  = existing ? (existing.created || now) : now;
+
   const row = {
     id: ui.editingId || generateId(),
     title: title || getDomain(url) || url,
@@ -1348,8 +1565,8 @@ async function saveBookmark() {
     tag_ids: JSON.stringify(ui.editingTagIds),
     tasks: JSON.stringify(ui.editingTasks),
     archived: ui.editingArchived,
-    created_by: currentUser.id,
-    created: ui.editingId ? (state.bookmarks.find(b => b.id === ui.editingId)?.created || now) : now,
+    created_by: originalCreatedBy,
+    created: originalCreated,
     updated: now,
   };
 
@@ -1775,6 +1992,172 @@ function showToast(msg) {
   el.textContent = msg; el.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ============================================================
+// NÁPOVĚDA
+// ============================================================
+const HELP_PASSWORD = 'zalozky2026';
+const HELP_KEY = 'zl_help_content';
+let helpEditMode = false;
+let helpEditUnlocked = false;
+let helpOriginalContent = '';
+
+const HELP_DEFAULT = `<h2>Vítejte v Záložkách</h2>
+<p>Záložky je aplikace pro správu webových odkazů s podporou složek, štítků, úkolů a sdílení v týmu.</p>
+<h2>Základní funkce</h2>
+<ul>
+<li><b>Přidat záložku</b> – tlačítko „+ Nová záložka" nebo FAB tlačítko na mobilu</li>
+<li><b>Upravit záložku</b> – tlačítko „Upravit" u záložky (jen vlastní záložky)</li>
+<li><b>Kopírovat URL</b> – ikona ⎘ zkopíruje odkaz do schránky (2s potvrzení)</li>
+<li><b>Otevřít odkaz</b> – kliknutí na název záložky otevře web v novém okně</li>
+</ul>
+<h2>Složky a štítky</h2>
+<ul>
+<li>Spravujte je v levém menu přes tlačítko +</li>
+<li>Podporují hierarchii – složky mohou mít neomezené podsložky</li>
+<li>Záložku přiřadíte při editaci</li>
+</ul>
+<h2>Sdílení a více uživatelů</h2>
+<ul>
+<li>Záložku nastavenou jako <b>Sdílená</b> vidí všichni přihlášení uživatelé</li>
+<li>Každý uživatel může <b>upravovat a mazat pouze své vlastní záložky</b></li>
+<li>Cizí sdílenou záložku lze otevřít a číst, ale ne přepsat</li>
+<li>Dva přístroje se stejným loginem se synchronizují každých 30 sekund</li>
+</ul>
+<h2>Export</h2>
+<p>Data exportujte přes „Export do CSV" v levém menu (formát pro Excel, odděleno středníkem).</p>
+<h2>Nastavení Supabase – důležité!</h2>
+<p>Pro správnou funkci je nutné v Supabase nastavit Row Level Security (RLS). Spusťte tento SQL v Supabase SQL editoru:</p>
+<pre style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:12px;font-family:monospace;overflow-x:auto;white-space:pre">-- Povolit RLS na všech tabulkách
+ALTER TABLE zl_bookmarks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE zl_folders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE zl_tags ENABLE ROW LEVEL SECURITY;
+ALTER TABLE zl_profiles ENABLE ROW LEVEL SECURITY;
+
+-- Záložky: číst smí přihlášení (vlastní + sdílené)
+CREATE POLICY "bookmarks_select" ON zl_bookmarks FOR SELECT
+  TO authenticated
+  USING (created_by = auth.uid() OR visibility = 'shared');
+
+-- Záložky: vkládat smí přihlášený uživatel (jen své)
+CREATE POLICY "bookmarks_insert" ON zl_bookmarks FOR INSERT
+  TO authenticated
+  WITH CHECK (created_by = auth.uid());
+
+-- Záložky: upravovat smí jen vlastník
+CREATE POLICY "bookmarks_update" ON zl_bookmarks FOR UPDATE
+  TO authenticated
+  USING (created_by = auth.uid())
+  WITH CHECK (created_by = auth.uid());
+
+-- Záložky: mazat smí jen vlastník
+CREATE POLICY "bookmarks_delete" ON zl_bookmarks FOR DELETE
+  TO authenticated
+  USING (created_by = auth.uid());
+
+-- Složky a štítky: číst smí všichni přihlášení
+CREATE POLICY "folders_all" ON zl_folders FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "tags_all" ON zl_tags FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- Profily: každý vidí všechny, upravuje jen svůj
+CREATE POLICY "profiles_select" ON zl_profiles FOR SELECT TO authenticated USING (true);
+CREATE POLICY "profiles_modify" ON zl_profiles FOR ALL TO authenticated
+  USING (id = auth.uid()) WITH CHECK (id = auth.uid());</pre>`;
+
+function openHelp() {
+  const saved = localStorage.getItem(HELP_KEY);
+  const content = saved || HELP_DEFAULT;
+  document.getElementById('help-view').innerHTML = content;
+  document.getElementById('help-editor').innerHTML = content;
+  document.getElementById('help-overlay').classList.add('open');
+  helpEditMode = false;
+  setHelpEditUI(false);
+  closeSidebar();
+}
+
+function closeHelp() {
+  document.getElementById('help-overlay').classList.remove('open');
+  helpEditMode = false;
+  helpEditUnlocked = false;
+  setHelpEditUI(false);
+}
+
+function setHelpEditUI(editing) {
+  document.getElementById('help-view').style.display = editing ? 'none' : '';
+  document.getElementById('help-editor').style.display = editing ? '' : 'none';
+  document.getElementById('help-editor').contentEditable = editing ? 'true' : 'false';
+  document.getElementById('help-toolbar').classList.toggle('show', editing);
+  document.getElementById('help-footer').classList.toggle('show', editing);
+  const btn = document.getElementById('help-edit-btn');
+  btn.classList.toggle('editing', editing);
+  btn.textContent = editing ? '👁 Náhled' : '✏ Upravit';
+}
+
+function toggleHelpEdit() {
+  if (helpEditMode) {
+    // Přepnout do náhledu (bez uložení)
+    helpEditMode = false;
+    setHelpEditUI(false);
+    // Obnovit view z editoru průběžně
+    document.getElementById('help-view').innerHTML = document.getElementById('help-editor').innerHTML;
+    return;
+  }
+  // Chceme přejít do edit módu
+  if (helpEditUnlocked) {
+    helpEditMode = true;
+    helpOriginalContent = document.getElementById('help-editor').innerHTML;
+    setHelpEditUI(true);
+  } else {
+    openPwdDialog();
+  }
+}
+
+function openPwdDialog() {
+  document.getElementById('pwd-input').value = '';
+  document.getElementById('pwd-error').textContent = '';
+  document.getElementById('pwd-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('pwd-input').focus(), 80);
+}
+
+function closePwdDialog() {
+  document.getElementById('pwd-overlay').classList.remove('open');
+}
+
+function checkHelpPassword() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === HELP_PASSWORD) {
+    helpEditUnlocked = true;
+    closePwdDialog();
+    helpEditMode = true;
+    helpOriginalContent = document.getElementById('help-editor').innerHTML;
+    setHelpEditUI(true);
+  } else {
+    document.getElementById('pwd-error').textContent = 'Nesprávné heslo.';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+
+function saveHelpContent() {
+  const content = document.getElementById('help-editor').innerHTML;
+  localStorage.setItem(HELP_KEY, content);
+  document.getElementById('help-view').innerHTML = content;
+  helpEditMode = false;
+  setHelpEditUI(false);
+  showToast('Nápověda uložena');
+}
+
+function cancelHelpEdit() {
+  document.getElementById('help-editor').innerHTML = helpOriginalContent;
+  document.getElementById('help-view').innerHTML = helpOriginalContent;
+  helpEditMode = false;
+  setHelpEditUI(false);
+}
+
+function execHelp(cmd, value) {
+  document.getElementById('help-editor').focus();
+  document.execCommand(cmd, false, value || null);
 }
 
 // ============================================================
