@@ -2,8 +2,10 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>Záložky</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -242,24 +244,26 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .sidebar-toggle-btn {
   width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  border-radius: 7px; cursor: pointer; color: var(--text2); font-size: 17px;
+  border-radius: 7px; cursor: pointer; color: var(--text2); font-size: 17px; line-height: 1;
   transition: all .12s; flex-shrink: 0; border: 1px solid var(--border);
-  background: var(--bg); user-select: none;
+  background: var(--bg); user-select: none; padding: 0;
 }
 .sidebar-toggle-btn:hover { background: var(--bg3); color: var(--text); }
-.breadcrumb { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
-.search-wrap { position: relative; }
+.breadcrumb { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; line-height: 1; }
+.search-wrap { position: relative; display: flex; align-items: center; }
 .search-wrap input {
-  padding: 7px 12px 7px 30px; border: 1px solid var(--border); border-radius: 7px;
+  padding: 0 12px 0 30px; border: 1px solid var(--border); border-radius: 7px;
   font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
   color: var(--text); outline: none; width: 200px; transition: all .15s;
+  height: 32px; box-sizing: border-box;
 }
 .search-wrap input:focus { border-color: var(--blue); width: 240px; box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
 .search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 13px; pointer-events: none; }
 .sort-select {
   padding: 7px 10px; border: 1px solid var(--border); border-radius: 7px;
   font-size: 13px; font-family: 'Geist', sans-serif; background: var(--bg);
-  color: var(--text); outline: none; cursor: pointer;
+  color: var(--text); outline: none; cursor: pointer; height: 32px;
+  display: flex; align-items: center; box-sizing: border-box;
 }
 .btn-new {
   display: flex; align-items: center; gap: 6px; padding: 7px 14px;
@@ -312,6 +316,10 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .bm-domain:hover { text-decoration: underline; }
 .bm-note-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Doména na mobilu – prostý text pod názvem */
+.bm-domain-mobile { font-size: 11px; color: var(--text3); display: none; }
+/* mobile-only – viditelné jen na mobilu */
+.mobile-only { display: none; }
 .bm-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .tag-chip { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); white-space: nowrap; }
 .shared-badge { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(37,99,235,.2); white-space: nowrap; }
@@ -667,20 +675,33 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .btn-new { display: none; }
   .desktop-only { display: none !important; }
 
-  /* Topbar – kompaktnější na mobilu */
-  .topbar { gap: 8px; padding: 0 12px; }
-  .breadcrumb { font-size: 14px; }
-  .search-wrap input { width: 110px; font-size: 13px; }
-  .search-wrap input:focus { width: 140px; }
-  .sort-select { font-size: 13px; padding: 6px 6px; }
+  /* Topbar – kompaktnější na mobilu, vše vystředěné */
+  .topbar { gap: 8px; padding: 0 12px; height: 54px; }
+  .sidebar-toggle-btn { width: 32px; height: 32px; flex-shrink: 0; }
+  .breadcrumb { font-size: 14px; line-height: 1; }
+  .search-wrap { height: 32px; }
+  .search-wrap input { width: 100px; height: 32px; font-size: 13px; padding: 0 10px 0 28px; }
+  .search-wrap input:focus { width: 130px; }
+  .sort-select { height: 32px; font-size: 13px; padding: 0 6px; }
 
-  /* Výpis záložek – skrýt poznámku a copy btn */
+  /* iOS: font-size >= 16px zabrání autozoomu při focusu */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+  .search-wrap input { font-size: 16px !important; }
+  .sort-select { font-size: 16px !important; }
+
+  /* Výpis záložek – skrýt poznámku, copy btn a task badge */
   .bm-note-preview { display: none !important; }
   .bm-copy-btn { display: none !important; }
-
-  /* Záložka row – kompaktnější */
-  .bookmark-row { padding: 10px 12px; }
-  .bm-title { font-size: 14px; }
+  .task-badge { display: none !important; }
+  /* Mobilní doména – zobrazit pod názvem */
+  .mobile-only { display: block !important; }
+  .bm-domain-mobile { display: block; }
+  /* Záložka row – kompaktnější, dvouřádkový layout */
+  .bookmark-row { padding: 10px 12px; align-items: center; }
+  .bm-title { font-size: 13px; }
+  .bm-domain { pointer-events: none; color: var(--text3) !important; text-decoration: none !important; font-size: 11px; }
   .bm-edit-btn { padding: 5px 10px; }
 
   /* Modal – celý displej, bez zaoblení */
@@ -694,8 +715,13 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   /* Pole v modalu */
   .field-row { grid-template-columns: 1fr; }
   .modal-body { padding: 14px 16px; }
-  .modal-header { padding: 0 16px; height: 54px; }
+  .modal-header { padding: 0 16px; height: auto; min-height: 54px; padding-top: 10px; padding-bottom: 10px; }
   .modal-footer { padding: 10px 16px; }
+  /* Název záložky – zalamovat */
+  .modal-title-input { white-space: normal; word-break: break-word; font-size: 16px; }
+  /* URL pole – větší na mobilu */
+  .url-textarea { min-height: 80px; font-size: 16px; }
+  .modal-url-copy-btn { height: 80px; }
 
   /* Nápověda – plná šířka */
   .help-overlay { border-radius: 0; }
@@ -1500,6 +1526,7 @@ function renderList() {
             ? `<a class="bm-domain desktop-only" href="${esc(domainRoot)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(domain)}</a>`
             : ''}
         </div>
+        ${domain ? `<div class="bm-domain-mobile mobile-only">${esc(domain)}</div>` : ''}
         ${notePreview ? `<div class="bm-note-preview">${esc(notePreview)}</div>` : ''}
       </div>
       <div class="bm-meta">
