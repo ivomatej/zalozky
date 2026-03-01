@@ -96,7 +96,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   flex: 1; padding: 9px; text-align: center; cursor: pointer;
   font-size: 14px; font-weight: 500; color: #6b7280; background: #f7f8fa; transition: all .15s;
 }
-.auth-tab.active { background: #fff; color: #1a1d23; font-weight: 600; }
+.auth-tab:hover { background: #eff6ff; color: #2563eb; }
+.auth-tab.active { background: #eff6ff; color: #2563eb; font-weight: 600; }
 .auth-field { margin-bottom: 14px; }
 .auth-field label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 5px; }
 .auth-field input {
@@ -128,8 +129,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .sidebar.collapsed { width: 0; min-width: 0; overflow: hidden; }
 .sidebar-top {
-  padding: 13px 12px 11px; border-bottom: 1px solid var(--border); flex-shrink: 0;
-  display: flex; align-items: center; gap: 8px;
+  height: 54px; padding: 0 12px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px; box-sizing: border-box;
 }
 .logo { display: flex; align-items: center; gap: 9px; flex: 1; min-width: 0; }
 .logo-icon {
@@ -234,7 +235,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 
 /* ── TOPBAR ───────────────────────────────────────────────── */
 .topbar {
-  display: flex; align-items: center; gap: 10px; padding: 13px 16px 11px;
+  display: flex; align-items: center; gap: 10px; padding: 0 16px;
+  height: 54px; box-sizing: border-box;
   border-bottom: 1px solid var(--border); flex-shrink: 0;
   background: var(--bg2);
 }
@@ -332,6 +334,14 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .bm-copy-btn:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
 .bm-copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: var(--green); }
+/* URL kopírování v modalu */
+.modal-url-copy-btn {
+  width: 36px; min-width: 36px; height: 60px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 7px; background: var(--bg);
+  color: var(--text3); font-size: 16px; cursor: pointer; transition: all .15s; flex-shrink: 0;
+}
+.modal-url-copy-btn:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
+.modal-url-copy-btn.copied { background: var(--green-bg); color: var(--green); border-color: var(--green); }
 .desktop-only { display: flex; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
 .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
@@ -408,15 +418,14 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .url-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
 
-/* Viditelnost – šedé tlačítka */
+/* Viditelnost – světle modrá aktivní varianta */
 .visibility-toggle { display: flex; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
 .vis-opt {
   flex: 1; padding: 8px; text-align: center; font-size: 13px; cursor: pointer;
   transition: all .12s; color: var(--text2); background: var(--bg);
 }
-.vis-opt:hover { background: var(--bg3); }
-.vis-opt.active { background: var(--bg3); color: var(--text); font-weight: 600; border-right: 1px solid var(--border); }
-.vis-opt:last-child.active { border-right: none; border-left: 1px solid var(--border); }
+.vis-opt:hover { background: var(--blue-bg); color: var(--blue); }
+.vis-opt.active { background: var(--blue-bg); color: var(--blue); font-weight: 600; }
 
 /* ── POZNÁMKA EDITOR ──────────────────────────────────────── */
 .note-editor-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
@@ -454,14 +463,14 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   color: var(--text); outline: none;
 }
 .task-add-row input:focus { border-color: var(--blue); }
-/* Přidat btn – šedé */
+/* Přidat btn – světle modrá */
 .task-add-btn {
-  padding: 7px 12px; background: var(--bg3); color: var(--text2);
-  border: 1px solid var(--border); border-radius: 6px; font-size: 13px;
+  padding: 7px 12px; background: var(--blue-bg); color: var(--blue);
+  border: 1px solid rgba(37,99,235,.25); border-radius: 6px; font-size: 13px;
   font-family: 'Geist', sans-serif; cursor: pointer; font-weight: 500;
   transition: all .12s; white-space: nowrap;
 }
-.task-add-btn:hover { background: var(--border2); color: var(--text); }
+.task-add-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
 .task-item { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 6px; transition: background .12s; }
 .task-item:hover { background: var(--bg2); }
 .task-checkbox { width: 15px; height: 15px; cursor: pointer; accent-color: var(--blue); flex-shrink: 0; }
@@ -530,6 +539,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 }
 .fab:hover { transform: scale(1.05); }
 .fab:active { transform: scale(.97); }
+.fab.hidden { display: none !important; }
 
 /* ── SIDEBAR OVERLAY (mobile) ─────────────────────────────── */
 .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 90; }
@@ -639,24 +649,71 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .pwd-btns { display: flex; gap: 8px; justify-content: flex-end; }
 
 @media (max-width: 720px) {
-  .sidebar { position: fixed; left: 0; top: 0; bottom: 0; transform: translateX(-110%); }
+  /* Sidebar – overlay, plná výška */
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0;
+    width: 280px !important; min-width: 280px !important;
+    transform: translateX(-110%); z-index: 100;
+  }
   .sidebar.open { transform: translateX(0) !important; box-shadow: var(--shadow-lg); }
   .sidebar.collapsed { transform: translateX(-110%); }
   .sidebar-overlay.open { display: block; }
+
+  /* FAB – jen v app, ne na auth */
+  #auth-screen ~ .fab,
+  #auth-screen:not([style*="none"]) + * .fab { display: none !important; }
   .fab { display: flex; }
+
   .btn-new { display: none; }
   .desktop-only { display: none !important; }
-  .search-wrap input { width: 130px; }
-  .search-wrap input:focus { width: 160px; }
+
+  /* Topbar – kompaktnější na mobilu */
+  .topbar { gap: 8px; padding: 0 12px; }
+  .breadcrumb { font-size: 14px; }
+  .search-wrap input { width: 110px; font-size: 13px; }
+  .search-wrap input:focus { width: 140px; }
+  .sort-select { font-size: 13px; padding: 6px 6px; }
+
+  /* Výpis záložek – skrýt poznámku a copy btn */
+  .bm-note-preview { display: none !important; }
+  .bm-copy-btn { display: none !important; }
+
+  /* Záložka row – kompaktnější */
+  .bookmark-row { padding: 10px 12px; }
+  .bm-title { font-size: 14px; }
+  .bm-edit-btn { padding: 5px 10px; }
+
+  /* Modal – celý displej, bez zaoblení */
+  .modal-overlay { padding: 0; align-items: flex-start; }
+  .modal-overlay.open .modal {
+    border-radius: 0; max-height: 100dvh; height: 100dvh;
+    max-width: 100vw; width: 100vw;
+  }
+  .modal { border-radius: 0; }
+
+  /* Pole v modalu */
   .field-row { grid-template-columns: 1fr; }
-  .modal { max-height: 100dvh; border-radius: 0; max-width: 100%; margin: 0; }
-  .modal-overlay { padding: 0; align-items: flex-end; }
-  .modal-overlay.open .modal { border-radius: 16px 16px 0 0; max-height: 95dvh; }
+  .modal-body { padding: 14px 16px; }
+  .modal-header { padding: 0 16px; height: 54px; }
+  .modal-footer { padding: 10px 16px; }
+
+  /* Nápověda – plná šířka */
+  .help-overlay { border-radius: 0; }
   .help-view, .help-editor { padding: 20px 16px; }
   .help-toolbar { padding: 7px 16px; }
   .help-footer { padding: 12px 16px; }
+
+  /* Auth box – plná šířka bez zaoblení */
+  #auth-screen { align-items: flex-start; padding: 0; background: #fff; }
+  .auth-box {
+    border-radius: 0; border: none; box-shadow: none;
+    max-width: 100vw; width: 100%; padding: 28px 20px;
+    min-height: 100dvh; overflow-y: auto;
+  }
 }
-</style>
+
+/* FAB skrýt pokud je auth-screen viditelný (JS řeší display) */
+#app[style*="none"] ~ .fab { display: none !important; }
 </head>
 <body>
 
@@ -684,7 +741,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
       <div class="sb-status-row">
         <div class="sb-dot" id="sb-dot"></div>
         <span class="sb-status-text" id="sb-status-text">Nezkontrolováno</span>
-        <button class="sb-test-btn" onclick="testSbConnection()">Ověřit připojení</button>
+        <button class="sb-test-btn" onclick="testSbConnection()">Připojit</button>
       </div>
     </div>
 
@@ -703,7 +760,8 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
     <div id="register-form" style="display:none">
       <div class="auth-field"><label>Zobrazované jméno</label><input type="text" id="reg-name" placeholder="Vaše jméno"></div>
       <div class="auth-field"><label>E-mail</label><input type="email" id="reg-email" placeholder="vas@email.cz"></div>
-      <div class="auth-field"><label>Heslo</label><input type="password" id="reg-password" placeholder="Min. 6 znaků"></div>
+      <div class="auth-field"><label>Heslo</label><input type="password" id="reg-password" placeholder="Min. 6 znaků" onkeydown="if(event.key==='Enter') doRegister()"></div>
+      <p style="font-size:13px;color:#6b7280;margin:10px 0 8px;line-height:1.5">📧 Dorazí ověřovací mail, je potřeba v něm kliknout na odkaz. Poté už se lze přihlásit.</p>
       <button class="auth-btn" onclick="doRegister()">Registrovat se</button>
     </div>
 
@@ -847,10 +905,13 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
     <div class="modal-body">
       <!-- Anchor pro owner notice -->
       <div id="modal-body-top" style="display:none"></div>
-      <!-- URL – textarea, zalamuje se -->
+      <!-- URL – textarea s tlačítkem kopírování -->
       <div class="field">
         <label>URL adresa</label>
-        <textarea class="url-textarea" id="modal-url" placeholder="https://" rows="2" oninput="autoFetchTitle()"></textarea>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <textarea class="url-textarea" id="modal-url" placeholder="https://" rows="2" oninput="autoFetchTitle()" style="flex:1;min-width:0"></textarea>
+          <button class="modal-url-copy-btn" id="modal-url-copy-btn" onclick="copyModalUrl()" title="Kopírovat URL">⎘</button>
+        </div>
       </div>
       <div class="field-row">
         <div class="field" style="margin-bottom:0">
@@ -1179,6 +1240,7 @@ function doLogout() {
   authToken = null; localStorage.removeItem('zl_session');
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
+  document.querySelector('.fab').classList.add('hidden');
 }
 
 // ============================================================
@@ -1193,6 +1255,8 @@ async function startApp(user) {
 
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+  // FAB jen na mobilu
+  if (window.innerWidth <= 720) document.querySelector('.fab').classList.remove('hidden');
 
   const savedTheme = localStorage.getItem('zl_theme');
   if (savedTheme === 'dark') { document.body.classList.add('dark'); document.getElementById('theme-toggle').classList.add('on'); }
@@ -1454,6 +1518,17 @@ function copyUrl(id, url) {
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('copy-' + id);
     if (!btn) return;
+    btn.classList.add('copied');
+    btn.textContent = '✓';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘'; }, 2000);
+  }).catch(() => showToast('Kopírování selhalo'));
+}
+
+function copyModalUrl() {
+  const url = document.getElementById('modal-url').value.trim();
+  if (!url) { showToast('Pole URL je prázdné'); return; }
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('modal-url-copy-btn');
     btn.classList.add('copied');
     btn.textContent = '✓';
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘'; }, 2000);
