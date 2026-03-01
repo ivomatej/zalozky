@@ -570,6 +570,9 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
 .read-note ul, .read-note ol { padding-left: 20px; }
 .read-tasks { margin-top: 8px; }
 
+/* PTR indikátor – skrytý na desktopu, viditelný jen na mobilu přes JS */
+.ptr-indicator { display: none; }
+
 /* ── RESPONSIVE ───────────────────────────────────────────── */
 /* ── NÁPOVĚDA ─────────────────────────────────────────────── */
 .help-overlay {
@@ -839,8 +842,7 @@ body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--tex
   .ptr-indicator.visible { height: 44px; border-bottom-color: var(--border); }
   .ptr-spinner { font-size: 18px; display: inline-block; }
   .ptr-spinner.spin { animation: ptr-spin .6s linear infinite; }
-  @keyframes ptr-spin { to { transform: rotate(360deg); } }
-}
+  @keyframes ptr-spin { to { transform: rotate(360deg); } }}
 
 /* FAB skrýt pokud je auth-screen viditelný (JS řeší display) */
 #app[style*="none"] ~ .fab { display: none !important; }
